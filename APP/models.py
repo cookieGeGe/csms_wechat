@@ -1,329 +1,434 @@
 # coding: utf-8
-from APP.functions import db
-from APP.model_serializ import BaseModel
+from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
+from sqlalchemy.schema import FetchedValue
+from flask_sqlalchemy import SQLAlchemy
 
 
-class Account(BaseModel):
-    __tablename__ = 'account'
-
-    id = db.Column(db.Integer, primary_key=True)
-    dnumber = db.Column(db.String(255))
-    dtypeid = db.Column(db.ForeignKey('electricbox.id', ondelete='CASCADE', onupdate='CASCADE'), index=True)
-    position = db.Column(db.String(255))
-    project = db.Column(db.String(255))
-    status = db.Column(db.Integer)
-    remark = db.Column(db.String(255))
-    collectionid = db.Column(db.String(255))
-    breaknum = db.Column(db.Integer)
-    fatherid = db.Column(db.Integer)
-    haschild = db.Column(db.Integer)
-    user = db.Column(db.String(255))
-    gateway = db.Column(db.String(255))
-    atemp = db.Column(db.String(255), server_default=db.FetchedValue())
-    arc = db.Column(db.String(255), server_default=db.FetchedValue())
-    groupnum = db.Column(db.String(255))
-
-    electricbox = db.relationship('Electricbox', primaryjoin='Account.dtypeid == Electricbox.id', backref='accounts')
-
-    _default_fields = [
-        "id", "dnumber", "dtypeid", "position", "project", "status", "remark", "collectionid", "breaknum", "fatherid",
-        "haschild", "user"
-    ]
-    _hidden_fields = []
-    _readonly_fields = []
+db = SQLAlchemy()
 
 
-class Alarm(BaseModel):
-    __tablename__ = 'alarm'
+class TbApi(db.Model):
+    __tablename__ = 'tb_api'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.String(255))
+    Description = db.Column(db.String(255))
+    PID = db.Column(db.ForeignKey('tb_permission.ID', ondelete='CASCADE', onupdate='CASCADE'), index=True)
+    Type = db.Column(db.Integer)
+
+    tb_permission = db.relationship('TbPermission', primaryjoin='TbApi.PID == TbPermission.ID', backref='tb_apis')
+
+
+class TbArea(db.Model):
+    __tablename__ = 'tb_area'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.String(50))
+    FatherID = db.Column(db.Integer)
+    HasChild = db.Column(db.Integer)
+
+
+class TbAttendance(db.Model):
+    __tablename__ = 'tb_attendance'
 
     id = db.Column(db.Integer, primary_key=True)
-    collectionid = db.Column(db.String(255))
-    alarmtype = db.Column(db.Integer)
-    alarmtime = db.Column(db.DateTime)
-    info = db.Column(db.String(255))
-    status = db.Column(db.Integer)
-    dealtime = db.Column(db.DateTime)
-    deal = db.Column(db.Integer)
-    dealinfo = db.Column(db.String(255))
-    temp = db.Column(db.String(255), server_default=db.FetchedValue())
-    cur = db.Column(db.String(255), server_default=db.FetchedValue())
-    arc = db.Column(db.Integer, server_default=db.FetchedValue())
-    smo = db.Column(db.Integer, server_default=db.FetchedValue())
-    temp0 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp1 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp2 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp3 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp4 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp5 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp6 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp7 = db.Column(db.String(255), server_default=db.FetchedValue())
-    avoltage = db.Column(db.String(255), server_default=db.FetchedValue())
-    bvoltage = db.Column(db.String(255), server_default=db.FetchedValue())
-    cvoltage = db.Column(db.String(255), server_default=db.FetchedValue())
-    acurrent = db.Column(db.String(255), server_default=db.FetchedValue())
-    bcurrent = db.Column(db.String(255), server_default=db.FetchedValue())
-    ccurrent = db.Column(db.String(255), server_default=db.FetchedValue())
-    tpower = db.Column(db.String(255), server_default=db.FetchedValue())
-    tempwarn = db.Column(db.String(255), server_default=db.FetchedValue())
-    curwarn = db.Column(db.String(255), server_default=db.FetchedValue())
-    alarmid = db.Column(db.ForeignKey('alarminfo.id', ondelete='CASCADE', onupdate='CASCADE'), index=True)
-
-    alarminfo = db.relationship('Alarminfo', primaryjoin='Alarm.alarmid == Alarminfo.id', backref='alarms')
-
-    _default_fields = [
-        "id", "collectionid", "alarmtype", "alarmtime", "info", "status", "dealtime", "deal", "dealinfo", "temp", "cur",
-        "arc", "smo"
-    ]
-    _hidden_fields = []
-    _readonly_fields = []
+    laborid = db.Column(db.Integer)
+    year = db.Column(db.String(255))
+    amin = db.Column(db.String(255))
+    amout = db.Column(db.String(255))
+    pmin = db.Column(db.String(255))
+    pmout = db.Column(db.String(255))
+    projectid = db.Column(db.Integer)
+    month = db.Column(db.String(255))
+    day = db.Column(db.String(255))
 
 
-class Alarminfo(BaseModel):
-    __tablename__ = 'alarminfo'
+class TbBadrecord(db.Model):
+    __tablename__ = 'tb_badrecord'
 
-    id = db.Column(db.Integer, primary_key=True)
-    collectionid = db.Column(db.String(255))
-    alarmtype = db.Column(db.Integer)
-    alarmtime = db.Column(db.DateTime)
-    info = db.Column(db.String(255))
-    status = db.Column(db.Integer)
-    dealtime = db.Column(db.DateTime)
-    deal = db.Column(db.Integer)
-    dealinfo = db.Column(db.String(255))
-    temp = db.Column(db.String(255), server_default=db.FetchedValue())
-    cur = db.Column(db.String(255), server_default=db.FetchedValue())
-    smo = db.Column(db.Integer, server_default=db.FetchedValue())
-    endtime = db.Column(db.DateTime)
-
-    _default_fields = [
-        "id", "collectionid", "alarmtype", "alarmtime", "info", "status", "dealtime", "deal", "dealinfo", "temp", "cur",
-        "smo", "endtime"
-    ]
-    _hidden_fields = []
-    _readonly_fields = []
+    ID = db.Column(db.Integer, primary_key=True)
+    Type = db.Column(db.Integer)
+    Description = db.Column(db.String(255))
+    RecordTime = db.Column(db.DateTime)
 
 
-class Arg(BaseModel):
-    __tablename__ = 'args'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), unique=True)
-    value = db.Column(db.String(255))
-
-    _default_fields = [
-        "id", "name", "value"
-    ]
-    _hidden_fields = []
-    _readonly_fields = []
-
-
-class Electricbox(BaseModel):
-    __tablename__ = 'electricbox'
-
-    id = db.Column(db.Integer, primary_key=True)
-    fatherid = db.Column(db.Integer)
-    name = db.Column(db.String(50))
-    protection = db.Column(db.String(50))
-    current = db.Column(db.String(50))
-    voltage = db.Column(db.String(50))
-    frequency = db.Column(db.String(50))
-    qlicense = db.Column(db.String(255))
-    pspecif = db.Column(db.String(255))
-    pstandard = db.Column(db.String(255))
-    tup = db.Column(db.String(255))
-    tdown = db.Column(db.String(255))
-    cup = db.Column(db.String(255))
-    cdown = db.Column(db.String(50))
-    haschild = db.Column(db.Integer)
-    boxdesc = db.Column(db.String(255))
-    imgurl = db.Column(db.String(255))
-
-    _default_fields = [
-        "id", "fatherid", "name", "protection", "current", "voltage", "frequency", "qlicense", "pspecif", "pstandard",
-        "tup", "tdown", "cup", "cdown", "haschild", "boxdesc"
-    ]
-    _hidden_fields = []
-    _readonly_fields = []
-
-
-class Gateway(BaseModel):
-    __tablename__ = 'gateway'
+class TbBank(db.Model):
+    __tablename__ = 'tb_bank'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    deviceid = db.Column(db.Integer)
-    ip = db.Column(db.String(255))
-    port = db.Column(db.String(255))
     description = db.Column(db.String(255))
 
-    _default_fields = [
-        "id", "name", "deviceid", "ip", "port", "description"
-    ]
-    _hidden_fields = []
-    _readonly_fields = []
+
+class TbCguarantee(db.Model):
+    __tablename__ = 'tb_cguarantee'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.String(255))
+    IDCard = db.Column(db.String(255))
+    Address = db.Column(db.String(255))
+    Phone = db.Column(db.String(255))
+    Area = db.Column(db.String(255))
+    Pvalue = db.Column(db.String(255))
+    Proportion = db.Column(db.String(255))
+    Paddress = db.Column(db.String(255))
+    IDimg = db.Column(db.String(255))
+    Pimg = db.Column(db.String(255))
+    GID = db.Column(db.Integer, server_default=db.FetchedValue())
+    Description = db.Column(db.String(255))
 
 
-class Log(BaseModel):
-    __tablename__ = 'log'
+class TbClas(db.Model):
+    __tablename__ = 'tb_class'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    CompanyID = db.Column(db.ForeignKey('tb_company.ID'), index=True)
+    ClassName = db.Column(db.String(50))
+    ProjectID = db.Column(db.Integer)
+
+    tb_company = db.relationship('TbCompany', primaryjoin='TbClas.CompanyID == TbCompany.ID', backref='tb_class')
+
+
+class TbCompany(db.Model):
+    __tablename__ = 'tb_company'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.String(255))
+    Legal = db.Column(db.String(255))
+    Address = db.Column(db.String(255))
+    Phone = db.Column(db.String(4096))
+    License = db.Column(db.String(255))
+    OtherPic = db.Column(db.String(255))
+    BadRecord = db.Column(db.String(255))
+    Type = db.Column(db.Integer)
+    Description = db.Column(db.String(255))
+    ProvinceID = db.Column(db.Integer)
+    CityID = db.Column(db.Integer)
+    DistrictID = db.Column(db.Integer)
+    HasBadRecord = db.Column(db.Integer)
+    url = db.Column(db.String(255))
+    otherinfo = db.Column(db.String(4096))
+
+
+class TbCompanyBadrecord(db.Model):
+    __tablename__ = 'tb_company_badrecord'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    CompanyID = db.Column(db.ForeignKey('tb_company.ID'), index=True)
+    BadrecordID = db.Column(db.ForeignKey('tb_otherfile.id'), index=True)
+
+    tb_otherfile = db.relationship('TbOtherfile', primaryjoin='TbCompanyBadrecord.BadrecordID == TbOtherfile.id', backref='tb_company_badrecords')
+    tb_company = db.relationship('TbCompany', primaryjoin='TbCompanyBadrecord.CompanyID == TbCompany.ID', backref='tb_company_badrecords')
+
+
+class TbGuarantee(db.Model):
+    __tablename__ = 'tb_guarantee'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    CompanyID = db.Column(db.String(255), index=True)
+    Capital = db.Column(db.String(255))
+    Nature = db.Column(db.String(255))
+    Name = db.Column(db.String(255))
+    Number = db.Column(db.String(255))
+    Amount = db.Column(db.String(255))
+    Kind = db.Column(db.String(255))
+    ProjectID = db.Column(db.String(255), index=True)
+    SignTime = db.Column(db.DateTime)
+    Category = db.Column(db.Integer)
+    Deadline = db.Column(db.String(255))
+    Expiretime = db.Column(db.DateTime)
+    Totalrate = db.Column(db.String(255))
+    Total = db.Column(db.String(255))
+    RealAC = db.Column(db.String(255))
+    Marginratio = db.Column(db.String(255))
+    Margin = db.Column(db.String(255))
+    Bene = db.Column(db.String(255))
+    PID = db.Column(db.Integer)
+    CID = db.Column(db.Integer)
+    DID = db.Column(db.Integer)
+    Description = db.Column(db.String(255))
+    Duration = db.Column(db.DateTime)
+    GuaCompany = db.Column(db.String(255))
+    Address = db.Column(db.String(4096))
+
+
+class TbLaborBadrecord(db.Model):
+    __tablename__ = 'tb_labor_badrecord'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    LaborID = db.Column(db.ForeignKey('tb_laborinfo.ID'), index=True)
+    BadRecordID = db.Column(db.ForeignKey('tb_otherfile.id'), index=True)
+
+    tb_otherfile = db.relationship('TbOtherfile', primaryjoin='TbLaborBadrecord.BadRecordID == TbOtherfile.id', backref='tb_labor_badrecords')
+    tb_laborinfo = db.relationship('TbLaborinfo', primaryjoin='TbLaborBadrecord.LaborID == TbLaborinfo.ID', backref='tb_labor_badrecords')
+
+
+class TbLaborinfo(db.Model):
+    __tablename__ = 'tb_laborinfo'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.String(50))
+    Age = db.Column(db.Integer)
+    Sex = db.Column(db.Integer)
+    Birthday = db.Column(db.DateTime)
+    Address = db.Column(db.String(255))
+    Nationality = db.Column(db.String(25))
+    IDCard = db.Column(db.String(25))
+    Phone = db.Column(db.String(20))
+    CompanyID = db.Column(db.ForeignKey('tb_company.ID'), index=True)
+    JobType = db.Column(db.Integer)
+    ClassID = db.Column(db.ForeignKey('tb_class.ID'), index=True)
+    Identity = db.Column(db.Integer)
+    DepartureDate = db.Column(db.DateTime)
+    EntryDate = db.Column(db.DateTime)
+    Hardhatnum = db.Column(db.String(50))
+    CloseupPhoto = db.Column(db.String(255))
+    Education = db.Column(db.String(50))
+    CreateTime = db.Column(db.DateTime)
+    ProjectID = db.Column(db.Integer)
+    IsPM = db.Column(db.Integer)
+    IssueAuth = db.Column(db.String(255))
+    Political = db.Column(db.String(255))
+    Train = db.Column(db.String(255))
+    EmerCon = db.Column(db.String(255))
+    IDP = db.Column(db.String(255))
+    IDB = db.Column(db.String(255))
+    PID = db.Column(db.Integer)
+    CID = db.Column(db.Integer)
+    DID = db.Column(db.Integer)
+    SVP = db.Column(db.DateTime)
+    EVP = db.Column(db.DateTime)
+    IsLeader = db.Column(db.Integer)
+    Superiors = db.Column(db.Integer)
+    Remark = db.Column(db.String(255))
+    BadRecord = db.Column(db.Integer, server_default=db.FetchedValue())
+    Isbadrecord = db.Column(db.Integer, server_default=db.FetchedValue())
+    FeeStand = db.Column(db.String(255))
+    Avatar = db.Column(db.String(255))
+    isFeeStand = db.Column(db.String(255))
+
+    tb_clas = db.relationship('TbClas', primaryjoin='TbLaborinfo.ClassID == TbClas.ID', backref='tb_laborinfos')
+    tb_company = db.relationship('TbCompany', primaryjoin='TbLaborinfo.CompanyID == TbCompany.ID', backref='tb_laborinfos')
+
+
+class TbOtherfile(db.Model):
+    __tablename__ = 'tb_otherfile'
 
     id = db.Column(db.Integer, primary_key=True)
-    info = db.Column(db.String(255))
-    userid = db.Column(db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), index=True)
-    otype = db.Column(db.String(255))
-    otime = db.Column(db.DateTime)
-
-    user = db.relationship('User', primaryjoin='Log.userid == User.id', backref='logs')
-
-    _default_fields = [
-        "id", "info", "userid", "otype", "otime"
-    ]
-    _hidden_fields = []
-    _readonly_fields = []
+    companyid = db.Column(db.Integer)
+    filename = db.Column(db.String(255))
+    filepath = db.Column(db.String(255))
+    type = db.Column(db.Integer, server_default=db.FetchedValue())
 
 
-class Protect(BaseModel):
-    __tablename__ = 'protect'
+class TbPerUrl(db.Model):
+    __tablename__ = 'tb_per_url'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    PID = db.Column(db.Integer)
+    url = db.Column(db.String(255))
+    name = db.Column(db.String(255))
+
+
+class TbPermission(db.Model):
+    __tablename__ = 'tb_permission'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    PerName = db.Column(db.String(255))
+    Permission = db.Column(db.String(255))
+
+
+class TbPicGroup(db.Model):
+    __tablename__ = 'tb_pic_group'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.String(255))
+    Type = db.Column(db.Integer)
+    GUrl = db.Column(db.String(255))
+    CID = db.Column(db.Integer)
+    Ptype = db.Column(db.Integer)
+
+
+class TbPic(db.Model):
+    __tablename__ = 'tb_pics'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    GroupID = db.Column(db.Integer)
+    Purl = db.Column(db.String(255))
+    Name = db.Column(db.String(255))
+    Ptype = db.Column(db.Integer)
+    Type = db.Column(db.String(255))
+    ProgressID = db.Column(db.Integer, server_default=db.FetchedValue())
+
+
+class TbProClas(db.Model):
+    __tablename__ = 'tb_pro_class'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    ProjectID = db.Column(db.ForeignKey('tb_project.ID'), index=True)
+    ClassID = db.Column(db.ForeignKey('tb_class.ID'), index=True)
+
+    tb_clas = db.relationship('TbClas', primaryjoin='TbProClas.ClassID == TbClas.ID', backref='tb_pro_class')
+    tb_project = db.relationship('TbProject', primaryjoin='TbProClas.ProjectID == TbProject.ID', backref='tb_pro_class')
+
+
+class TbProgres(db.Model):
+    __tablename__ = 'tb_progress'
+
+    ID = db.Column(db.Integer, primary_key=True, nullable=False)
+    ProjectID = db.Column(db.ForeignKey('tb_project.ID'), index=True)
+    Status = db.Column(db.Integer)
+    UploadTime = db.Column(db.DateTime)
+    Person = db.Column(db.String(512))
+    Remark = db.Column(db.String(255))
+    RType = db.Column(db.Integer)
+    Contract = db.Column(db.Integer)
+    Content = db.Column(db.String(512))
+    RealName = db.Column(db.Integer)
+    Attend = db.Column(db.Integer)
+    Wage = db.Column(db.Integer)
+    Rights = db.Column(db.Integer)
+    Lwage = db.Column(db.Integer)
+    LAB = db.Column(db.Integer)
+    PAB = db.Column(db.Integer)
+    Arrears = db.Column(db.Integer)
+    LPayCert = db.Column(db.Integer)
+    PPay = db.Column(db.String(255), server_default=db.FetchedValue())
+    LPay = db.Column(db.String(255), server_default=db.FetchedValue())
+    Total = db.Column(db.String(255), server_default=db.FetchedValue())
+    Percent = db.Column(db.String(255), primary_key=True, nullable=False)
+    year = db.Column(db.String(255))
+    month = db.Column(db.String(255))
+
+    tb_project = db.relationship('TbProject', primaryjoin='TbProgres.ProjectID == TbProject.ID', backref='tb_progress')
+
+
+class TbProject(db.Model):
+    __tablename__ = 'tb_project'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.String(255))
+    Type = db.Column(db.Integer)
+    GuaranType = db.Column(db.Integer)
+    Price = db.Column(db.String(255))
+    Duration = db.Column(db.String(255))
+    GAmount = db.Column(db.String(255))
+    PrinPical = db.Column(db.String(255))
+    WagePercent = db.Column(db.String(50))
+    StartTime = db.Column(db.DateTime)
+    EndTime = db.Column(db.DateTime)
+    Address = db.Column(db.String(255))
+    Build = db.Column(db.Integer)
+    Cons = db.Column(db.Integer)
+    ConsManager = db.Column(db.String(255))
+    OwnerManager = db.Column(db.String(255))
+    LaborManager = db.Column(db.String(255), server_default=db.FetchedValue())
+    Supervisor = db.Column(db.String(255), server_default=db.FetchedValue())
+    Description = db.Column(db.String(255))
+    Status = db.Column(db.Integer, server_default=db.FetchedValue())
+    PID = db.Column(db.Integer, index=True)
+    CID = db.Column(db.Integer)
+    DID = db.Column(db.Integer)
+    Total = db.Column(db.String(255), server_default=db.FetchedValue())
+    TotalPay = db.Column(db.String(255), server_default=db.FetchedValue())
+    Issue = db.Column(db.String(255), server_default=db.FetchedValue())
+    TotalMonth = db.Column(db.Integer, server_default=db.FetchedValue())
+    SubCompany = db.Column(db.String(2048), server_default=db.FetchedValue())
+    Bank = db.Column(db.Integer)
+
+
+class TbSalary(db.Model):
+    __tablename__ = 'tb_salary'
 
     id = db.Column(db.Integer, primary_key=True)
-    deviceid = db.Column(db.ForeignKey('account.id', ondelete='CASCADE', onupdate='CASCADE'), index=True)
-    week = db.Column(db.DateTime)
-    hm = db.Column(db.DateTime)
-    month = db.Column(db.DateTime)
-
-    account = db.relationship('Account', primaryjoin='Protect.deviceid == Account.id', backref='protects')
-
-    _default_fields = [
-        "id", "deviceid", "week", "hm", "month"
-    ]
-    _hidden_fields = []
-    _readonly_fields = []
-
-
-class Protectlog(BaseModel):
-    __tablename__ = 'protectlog'
-
-    id = db.Column(db.Integer, primary_key=True)
-    deviceid = db.Column(db.ForeignKey('account.id', ondelete='CASCADE', onupdate='CASCADE'), index=True)
-    ptype = db.Column(db.Integer)
-    person = db.Column(db.String(255))
-    pltime = db.Column(db.DateTime)
-    remark = db.Column(db.String(255))
-    status = db.Column(db.Integer)
-    itime = db.Column(db.DateTime)
-
-    account = db.relationship('Account', primaryjoin='Protectlog.deviceid == Account.id', backref='protectlogs')
-
-    _default_fields = [
-        "id", "deviceid", "ptype", "person", "pltime", "remark", "status", "itime"
-    ]
-    _hidden_fields = []
-    _readonly_fields = []
-
-
-class Rawdatum(BaseModel):
-    __tablename__ = 'rawdata'
-    __table_args__ = (
-        db.Index('temp_rc', 'id', 'temp', 'rc'),
-        db.Index('collectionid_s', 'id', 'collectionid', 'month', 'year', 'day')
-    )
-
-    id = db.Column(db.Integer, primary_key=True)
-    collectionid = db.Column(db.String(255))
-    temp = db.Column(db.String(255))
-    rc = db.Column(db.String(255))
+    laborid = db.Column(db.Integer)
+    status = db.Column(db.String(255))
+    swipe = db.Column(db.String(255))
+    manual = db.Column(db.String(255))
+    type = db.Column(db.String(255))
+    unit = db.Column(db.String(255))
+    basicwage = db.Column(db.String(255))
+    overtime = db.Column(db.String(255))
+    subtotal = db.Column(db.String(255))
+    reward = db.Column(db.String(255))
+    deduction = db.Column(db.String(255))
     total = db.Column(db.String(255))
-    arc = db.Column(db.Integer, server_default=db.FetchedValue())
-    smoke = db.Column(db.Integer)
-    workstatus = db.Column(db.Integer)
-    rtime = db.Column(db.DateTime)
-    month = db.Column(db.String(255))
+    projectname = db.Column(db.String(255))
+    companyname = db.Column(db.String(255))
     year = db.Column(db.String(255))
-    day = db.Column(db.String(255))
-    temp0 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp1 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp2 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp3 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp4 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp5 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp6 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp7 = db.Column(db.String(255), server_default=db.FetchedValue())
-    avoltage = db.Column(db.String(255), server_default=db.FetchedValue())
-    bvoltage = db.Column(db.String(255), server_default=db.FetchedValue())
-    cvoltage = db.Column(db.String(255), server_default=db.FetchedValue())
-    acurrent = db.Column(db.String(255), server_default=db.FetchedValue())
-    bcurrent = db.Column(db.String(255), server_default=db.FetchedValue())
-    ccurrent = db.Column(db.String(255), server_default=db.FetchedValue())
-    tpower = db.Column(db.String(255), server_default=db.FetchedValue())
-    tempwarn = db.Column(db.String(255), server_default=db.FetchedValue())
-    curwarn = db.Column(db.String(255), server_default=db.FetchedValue())
-
-    _default_fields = [
-        "id", "collectionid", "temp", "rc", "total", "arc", "smoke", "workstatus", "rtime", "month", "year", "day"
-    ]
-    _hidden_fields = []
-    _readonly_fields = []
+    month = db.Column(db.String(255))
 
 
-class SaveOneDay(BaseModel):
-    __tablename__ = 'save_one_day'
-    __table_args__ = (
-        db.Index('collectionid', 'id', 'month', 'day', 'year', 'collectionid'),
-    )
+class TbTemplate(db.Model):
+    __tablename__ = 'tb_template'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.String(255))
+    Time = db.Column(db.DateTime)
+    Description = db.Column(db.String(255))
+    Type = db.Column(db.Integer)
+    File = db.Column(db.String(255))
+    Number = db.Column(db.String(255))
+
+
+class TbUser(db.Model):
+    __tablename__ = 'tb_user'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    LoginName = db.Column(db.String(255))
+    UserName = db.Column(db.String(255))
+    Password = db.Column(db.String(255))
+    Email = db.Column(db.String(50))
+    Phone = db.Column(db.String(20))
+    Description = db.Column(db.String(255))
+    AdminType = db.Column(db.Integer)
+    Avatar = db.Column(db.String(255))
+    Status = db.Column(db.Integer)
+    CompanyID = db.Column(db.Integer)
+    permission = db.Column(db.Integer, server_default=db.FetchedValue())
+
+
+class TbUserArea(db.Model):
+    __tablename__ = 'tb_user_area'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    UserID = db.Column(db.ForeignKey('tb_user.ID', ondelete='CASCADE', onupdate='CASCADE'), index=True)
+    AreaID = db.Column(db.ForeignKey('tb_area.ID', ondelete='CASCADE', onupdate='CASCADE'), index=True)
+
+    tb_area = db.relationship('TbArea', primaryjoin='TbUserArea.AreaID == TbArea.ID', backref='tb_user_areas')
+    tb_user = db.relationship('TbUser', primaryjoin='TbUserArea.UserID == TbUser.ID', backref='tb_user_areas')
+
+
+class TbUserPer(db.Model):
+    __tablename__ = 'tb_user_per'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    UID = db.Column(db.ForeignKey('tb_user.ID', ondelete='CASCADE', onupdate='CASCADE'), index=True)
+    PID = db.Column(db.ForeignKey('tb_permission.ID', ondelete='CASCADE', onupdate='CASCADE'), index=True)
+
+    tb_permission = db.relationship('TbPermission', primaryjoin='TbUserPer.PID == TbPermission.ID', backref='tb_user_pers')
+    tb_user = db.relationship('TbUser', primaryjoin='TbUserPer.UID == TbUser.ID', backref='tb_user_pers')
+
+
+class TbUserPro(db.Model):
+    __tablename__ = 'tb_user_pro'
 
     id = db.Column(db.Integer, primary_key=True)
-    start = db.Column(db.String(255))
-    end = db.Column(db.String(255))
-    temp = db.Column(db.String(255))
-    current = db.Column(db.String(255))
-    smoke = db.Column(db.Integer)
-    temp0 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp1 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp2 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp3 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp4 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp5 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp6 = db.Column(db.String(255), server_default=db.FetchedValue())
-    temp7 = db.Column(db.String(255), server_default=db.FetchedValue())
-    avoltage = db.Column(db.String(255), server_default=db.FetchedValue())
-    bvoltage = db.Column(db.String(255), server_default=db.FetchedValue())
-    cvoltage = db.Column(db.String(255), server_default=db.FetchedValue())
-    acurrent = db.Column(db.String(255), server_default=db.FetchedValue())
-    bcurrent = db.Column(db.String(255), server_default=db.FetchedValue())
-    ccurrent = db.Column(db.String(255), server_default=db.FetchedValue())
-    tpower = db.Column(db.String(255), server_default=db.FetchedValue())
-    tempwarn = db.Column(db.String(255), server_default=db.FetchedValue())
-    curwarn = db.Column(db.String(255), server_default=db.FetchedValue())
-    time = db.Column(db.DateTime)
-    month = db.Column(db.String(255))
-    day = db.Column(db.String(255))
+    uid = db.Column(db.ForeignKey('tb_user.ID', ondelete='CASCADE', onupdate='CASCADE'), index=True)
+    pid = db.Column(db.ForeignKey('tb_project.ID', ondelete='CASCADE', onupdate='CASCADE'), index=True)
+
+    tb_project = db.relationship('TbProject', primaryjoin='TbUserPro.pid == TbProject.ID', backref='tb_user_pros')
+    tb_user = db.relationship('TbUser', primaryjoin='TbUserPro.uid == TbUser.ID', backref='tb_user_pros')
+
+
+class TbWage(db.Model):
+    __tablename__ = 'tb_wage'
+
+    ID = db.Column(db.Integer, primary_key=True)
+    ProjectID = db.Column(db.Integer)
+    Status = db.Column(db.Integer)
+    WTime = db.Column(db.DateTime)
+    RPay = db.Column(db.Float(20))
     year = db.Column(db.String(255))
-    collectionid = db.Column(db.String(255))
-
-    _default_fields = [
-        "id", "start", "end", "temp", "current", "smoke", "time", "month", "day", "year", "collectionid"
-    ]
-    _hidden_fields = []
-    _readonly_fields = []
-
-
-class User(BaseModel):
-    __tablename__ = 'user'
-
-    id = db.Column(db.Integer, primary_key=True)
-    loginname = db.Column(db.String(50))
-    username = db.Column(db.String(50))
-    password = db.Column(db.String(255))
-    phone = db.Column(db.String(20))
-    email = db.Column(db.String(50))
-    address = db.Column(db.String(255))
-    avatar = db.Column(db.String(255))
-    description = db.Column(db.String(255))
-    type = db.Column(db.Integer)
-    status = db.Column(db.Integer)
-
-    _default_fields = [
-        "id", "loginname", "username", "password", "phone", "email", "address", "avatar", "description", "type",
-        "status"
-    ]
-    _hidden_fields = []
-    _readonly_fields = []
+    month = db.Column(db.String(255))
