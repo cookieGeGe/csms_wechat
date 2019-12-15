@@ -219,6 +219,20 @@ export function queryBankInfo(params) {
     })
 }
 
+// 获取所有银行
+export function queryBankAll(params) {
+  /*
+      params = {
+          id:    'int   月份对应的ID',
+      }
+  */
+  return request({
+    url: '/wechat/query/bank/all',
+    method: 'get',
+    params: params
+  })
+}
+
 // 保函查询
 export function queryGuarantee(params) {
 /*

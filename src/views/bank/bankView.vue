@@ -1,7 +1,7 @@
 <template>
   <div class="van-content">
     <div class="card">
-      <guaranteeItem :isReload="isReload" :result="this.result"></guaranteeItem>
+      <bankItem :isReload="isReload" :result="this.result"></bankItem>
     </div>
     <div class="card">
       <div class="info">
@@ -67,8 +67,8 @@
 </template>
 
 <script>
-  import guaranteeItem from '@/components/guarantee/guarateeItem';
-  import {queryGuarantee} from '@/api/api';
+  import bankItem from '@/components/bank/bankItem';
+  import {queryBank} from '@/api/api';
   import GroupImg from '@/components/GroupImg/GroupImg'
 
   export default {
@@ -87,13 +87,13 @@
       }
     },
     components: {
-      guaranteeItem,
+      bankItem,
       GroupImg
     },
     methods: {
       reload() {
-        queryGuarantee(this.searchType).then(res => {
-          var ret = res.guarantee;
+        queryBank(this.searchType).then(res => {
+          var ret = res.project;
           console.log(res);
           this.isReload = false; //是否重新赋值
           this.result = ret;
@@ -117,7 +117,7 @@
 <style scoped>
   .card {
     padding: 0.5rem 0.5rem;
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
   }
 
   .info span {

@@ -13,6 +13,9 @@ import helpView from '@/views/help/helpView'
 import guarantee from '@/views/guarantee/guarantee'
 import guaranteeView from '@/views/guarantee/guaranteeView'
 
+import bank from '@/views/bank/bank'
+import bankView from '@/views/bank/bankView'
+
 import Search from '@/components/areas/Search'
 
 Vue.use(Router);
@@ -79,6 +82,16 @@ export default new Router({
       path: '/GuaView',
       name: 'GuaView',
       component: guaranteeView
+    },
+    {
+      path: '/bank',
+      name: 'bank',
+      component: bank
+    },
+    {
+      path: '/bankView',
+      name: 'bankView',
+      component: bankView
     },
   ]
 })

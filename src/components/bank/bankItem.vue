@@ -4,26 +4,21 @@
          @click="toView(item.id)"
          style="border-bottom: 1px solid #ececec;padding:.5rem .5rem 1rem  .5rem">
       <van-row class="tit">
-        <van-col span="12" class="van-ellipsis">保函编号：{{item.number}}</van-col>
-        <van-col span="12" style="text-align: right">
-          <van-tag color="#8eaccc">{{guarantype(item.category)}}</van-tag>
-          <van-tag color="#8ec5cc" v-if="item.is_expiretime ==1">已过期</van-tag>
-          <van-tag color="#d9aa60" v-else>未过期</van-tag>
-        </van-col>
+        <van-col span="24" class="van-ellipsis">{{item.bank || '银行未填写'}} {{item.account || '账号未知'}}</van-col>
       </van-row>
       <van-row class="project">
-        项目：{{item.projectid}}
+        项目：{{item.name}}
       </van-row>
       <van-row type="flex" align="center">
         <van-col span="16">
-          <div>项目区域：{{item.pname}}-{{item.cname}}-{{item.dname}}</div>
-          <div>公司名称：{{item.companyid}}</div>
-          <div>收益人名称：{{item.bene}}</div>
-          <div>保函期限：{{item.signtime}} 至 {{item.expiretime}}</div>
+          <div>总工期：{{item.totalmonth}}个月 &#12288;开始时间：{{item.starttime}}</div>
+          <div>总造价：¥{{item.price}}</div>
+          <div>农民工工资比例：{{item.wagepercent}}</div>
+          <div>每月发放金额：¥{{(item.price / 100 * item.wagepercent).toFixed(2)}}</div>
         </van-col>
         <van-col span="8" align="center"  class="left-border">
-          <div style="color: #d9aa60;font-weight: bold;">¥ {{item.amount}}</div>
-          <div>担保金额(万元)</div>
+          <div style="color: #d9aa60;font-weight: bold;">¥ {{item.totalpay}}</div>
+          <div>实发总额(元)</div>
         </van-col>
       </van-row>
     </div>
@@ -46,7 +41,7 @@
     methods: {
       toView(id) {
         this.$router.push({
-          name: 'GuaView',
+          name: 'bankView',
           params: {
             id
           },
