@@ -2,12 +2,12 @@
   <div class="company">
     <Search @searchObj="searchObj"></Search>
     <van-row type="flex" align="center" justify="space-between" style="margin: 10px;margin-top: 0;">
-      <van-col span="9">
+      <van-col span="">
         <van-dropdown-menu active-color="#8eaccc" class="dropdown">
           <van-dropdown-item v-model="searchType.type" :options="companyTypeArr" @change="typeChange"/>
         </van-dropdown-menu>
-      </van-col>
-      <van-col span="9">
+      <!--</van-col>-->
+      <!--<van-col span="">-->
         <van-dropdown-menu active-color="#8eaccc" class="dropdown">
           <van-dropdown-item v-model="searchType.status" :options="companyBadArr" @change="statusChange"/>
         </van-dropdown-menu>
@@ -135,11 +135,16 @@
   .company .dropdown {
     border-radius: 50rem;
     height: 2rem;
+    display: inline-block;
   }
 
   /deep/
   .van-dropdown-menu__title {
     font-size: 1rem;
+  }
+
+  /deep/ .van-dropdown-menu__item {
+    padding-right: 10px;
   }
 
   .company /deep/ .van-dropdown-item__option {

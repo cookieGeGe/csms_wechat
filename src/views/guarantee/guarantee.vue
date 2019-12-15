@@ -2,7 +2,7 @@
   <div class="company">
     <Search @searchObj="searchObj"></Search>
     <van-row type="flex" align="center" justify="space-between" style="margin: 10px;margin-top: 0;">
-      <van-col span="9">
+      <van-col span="">
         <van-dropdown-menu active-color="#8eaccc" class="dropdown">
           <van-dropdown-item v-model="searchType.type" :options="guaranteeTypeArr" @change="typeChange"/>
         </van-dropdown-menu>
@@ -133,6 +133,9 @@
   /deep/
   .van-dropdown-menu__title {
     font-size: 1rem;
+  }
+  /deep/ .van-dropdown-menu__item {
+    padding-right: 10px;
   }
 
   .company /deep/ .van-dropdown-item__option {
