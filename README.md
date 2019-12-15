@@ -32,6 +32,5 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 git fetch origin dev
 再合并
 git merge origin/dev
-
 提交
 git push origin dev

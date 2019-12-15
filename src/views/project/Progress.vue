@@ -1,34 +1,134 @@
 <template>
-  <div class="progress">
-    是否异常：否 日期：2019-09-12
-    进度（%）：
-    25%
-    工程巡查情况：据项目相关负责人说明，由于7月工资表到近日才交齐，因此7月工资将于9月5日左右发放，同时8月工资将于15日左右进行发放。
-    监管类型：正常员工是否有签订合同：无
-    此项目是否进行实名制管理：无是否有考勤记录：无
-    农民工工资公示牌：无劳务专员任命书：无
-    项目经理任命书：无农民工工资支付凭证：有
-    月度工资发放情况表
-    用工人数：0	支付款项：0
-    应发人数：0	欠款：0
-    实际发放数：0	差值：0
-    打卡数：0	总工资：0
-    询问人员
-    照片	姓名	电话	所在班组	到场时间	工资领取情况
-    <van-row>
-      <van-col  span="3">
+    <van-row class="progress" >
+      <van-col span="4" class="t-center">
         <div class="year" v-for="(value,key) in yearData">
-          <div class="tit">{{key}}</div>
-          <div class="monthCont">
-            <div class="month"  v-for="(month,monthkey) in value">
-              <span></span>{{monthkey+1}}
+          <div class="tit" @click="openers(key,$event)">{{key}}</div>
+          <div class="monthCont" style="display: none;">
+            <div v-for="(month,monthkey) in value" :class="month.is_current?'act':''"
+                 @click="progresser(month.id,month.is_input,$event)">
+              <span :class="month.is_input?'circle':''"></span>{{monthkey + 1}}月
             </div>
           </div>
         </div>
       </van-col>
+      <van-col span="20">
+          <van-row type="flex" justify="space-between" align="center">
+            <van-col>工资:</van-col>
+            <van-col span="16">
+              <van-progress
+                  :percentage="percentage"
+                  :show-pivot="false"
+                  color="#8eaccc"
+              />
+            </van-col>
+            <van-col>{{prog.percent}}%</van-col>
+          </van-row>
+          <van-row type="flex" align="center">
+            <van-col span="20">
+              <div class="info">日期:{{prog.year+prog.month}}</div>
+            </van-col>
+            <van-col span="4" style="text-align: right">
+              <van-tag color="#8ec5cc" v-if="prog.status==0" >正常</van-tag>
+              <van-tag color="#d9aa60" v-else >异常</van-tag>
+            </van-col>
+          </van-row>
+          <div>
+            <div>工程巡查情况:</div>
+            <p>{{prog.content}}</p>
+          </div>
+          <van-row>
+            <van-col span="12">
+              <div>
+                监管类型:
+                <span v-if="prog.rtype==0">正常</span>
+                <span v-else-if="prog.rtype==1">常态监管</span>
+                <span v-else-if="prog.rtype==2" class="bad">重点监管</span>
+                <span v-else class="bad">严重监管</span>
+              </div>
+              <div>
+                员工是否有签订合同:
+                <span v-if="prog.contract==0" >有</span>
+                <span v-else>无</span>
+              </div>
+              <div>
+                是否进行实名制管理:
+                <span v-if="prog.realname==0" >有</span>
+                <span v-else>无</span>
+              </div>
+              <div>
+                有无考勤记录:
+                <span v-if="prog.attend==0" >有</span>
+                <span v-else>无</span>
+              </div>
+            </van-col>
+            <van-col span="12">
+              <div>
+                农民工工资公示:
+                <span v-if="prog.lwages==0" >有</span>
+                <span v-else>无</span>
+              </div>
+              <div>
+                劳务专员任命书:
+                <span v-if="prog.lab==0" >有</span>
+                <span v-else>无</span>
+              </div>
+              <div>
+                项目经理任命书:
+                <span v-if="prog.pab==0" >有</span>
+                <span v-else>无</span>
+              </div>
+              <div>
+                农民工工资支付凭证:
+                <span v-if="prog.lpaycert==0" >有</span>
+                <span v-else>无</span>
+              </div>
+            </van-col>
+          </van-row>
+          <div>
+            <div>月度工资情况发放表:</div>
+            <table class="table" style="width: 100%">
+              <tbody>
+              <tr>
+                <td style="width: 50%">用工人数：<span>{{prog.workers}}</span></td>
+                <td style="width: 50%">支付款项：<span>{{prog.payment}}</span></td>
+              </tr>
+              <tr>
+                <td>应发人数：<span>{{prog.shouldissues}}</span></td>
+                <td>欠款：<span>{{prog.overdraft}}</span></td>
+              </tr>
+              <tr>
+                <td>实际发放数：<span>{{prog.realIssues}}</span></td>
+                <td>差值：<span>{{prog.difference}}</span></td>
+              </tr>
+              <tr>
+                <td>打卡数：<span>{{prog.punches}}</span></td>
+                <td>总工资：<span>{{prog.totalsalary}}</span></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--<div>
+            <div>询问人员:</div>
+            <van-row>
+              <van-col>姓名	</van-col>
+              <van-col>电话	</van-col>
+              <van-col>所在班组</van-col>
+              <van-col>到场时间</van-col>
+              <van-col>工资领取情况</van-col>
+            </van-row>
+
+            <van-row v-for="preson ">
+              <van-col>姓名	</van-col>
+              <van-col>电话	</van-col>
+              <van-col>所在班组</van-col>
+              <van-col>到场时间</van-col>
+              <van-col>工资领取情况</van-col>
+            </van-row>
+            <div>进度照片:</div>
+          </div>-->
+      </van-col>
     </van-row>
 
-  </div>
 </template>
 
 <script>
@@ -39,38 +139,80 @@
     name: 'Progress',
     data () {
       return {
-        progressData:{},
-        yearData:'',
+        prog: {},
+        yearData: '',
+        percentage:0
       }
     },
     props: ['progress', 'yearlist'],
-    components: {
-
-    },
+    components: {},
     methods: {
-
+      progresser(id, is_input, event){
+        if (!is_input) return;
+        var eAct = document.getElementsByClassName('act')[0];
+        eAct.setAttribute("class", "");
+        var el = event.currentTarget;
+        el.setAttribute("class", "act");
+      },
+      getNextElement(element) {
+        if (element.nextElementSibling) {
+          return element.nextElementSibling;
+        } else {
+          var next = element.nextSibling;//下一个兄弟节点
+          while (next && 1 !== next.nodeType) {//有 并且 不是我想要的
+            next = next.nextSibling;
+          }
+          return next;
+        }
+      },
+      openers(key,event){
+        var el = event.currentTarget;
+        var monthCont = this.getNextElement(el);
+        if (monthCont.style.display == 'none') {
+          monthCont.style.display = 'block'
+        } else {
+          monthCont.style.display = 'none'
+        }
+      }
     },
     mounted(){
       this.yearData = this.yearlist;
-      this.progressData = this.progress;
+      this.prog = this.progress;
+      this.percentage=parseInt(this.prog.percent)>=100?100:parseInt(this.prog.percent)
     },
   }
 </script>
 
 
 <style scoped>
-  .company .dropdown {
-    border-radius: 50rem;
-    height: 2rem;
+  .t-center {
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: .5rem;
   }
 
-  /deep/
-  .van-dropdown-menu__title {
-    font-size: 1rem;
+  .monthCont {
+
   }
 
-  .company /deep/ .van-dropdown-item__option {
-    line-height: 1rem;
-    font-size: 1rem;
+  .monthCont div {
+    margin: .5rem 0;
+  }
+
+  .act {
+    background: #8eaccc;
+  }
+
+  .circle {
+    display: inline-block;
+    height: .6rem;
+    width: .6rem;
+    vertical-align: middle;
+    background: #8ec5cc;
+    border-radius: 50%;
+    margin-right: .5rem;
+  }
+  .bad{
+    color: #d9aa60;
   }
 </style>
