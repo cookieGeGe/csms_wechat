@@ -144,7 +144,7 @@
 <style scoped>
   .company .dropdown {
     border-radius: 50rem;
-    height: 2rem;
+    height: 1.8rem;
     display: inline-block;
   }
 
@@ -155,6 +155,14 @@
 
   /deep/ .van-dropdown-menu__item {
     padding-right: 10px;
+  }
+
+  /deep/ .van-dropdown-menu__title {
+    line-height: 1.8rem;
+  }
+
+  /deep/ .van-dropdown-menu__title div {
+    margin-top: 1px;
   }
 
   .company /deep/ .van-dropdown-item__option {

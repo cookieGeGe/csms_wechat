@@ -23,38 +23,67 @@
         <span>总收费金额(万元)：{{result.total}}</span>
       </div>
       <div class="info">
-        <span>备注</span>
-        <!--<span>{{result.description || '无'}}</span>-->
         <GroupImg :groupList="groupList"></GroupImg>
       </div>
       <div class="info">
-        <span>保函照片</span>
-        <span></span>
+        <span>备注</span>
+        <span>{{result.description || '无'}}</span>
+
+      </div>
+
+      <div class="info">
+        <span>反担保</span>
+        <van-row class="cguarantee" v-for="(item, index) in cguarantee" :key="index">
+          <van-col span="12" class="box right-border">
+            <img v-if="item.pimg.length>0" @click="showimg(myLocalHost+item.pimg)" :src="myLocalHost+item.pimg"
+                 alt="">
+            <img v-else src="../../assets/index/no_pic.jpg" alt="">
+            <span class="text-center">房产证</span>
+            <span>产权比例：{{item.proportion}}</span>
+            <span>房屋面积(平米)：{{item.area}}</span>
+            <span>房产价值：{{item.value}}</span>
+          </van-col>
+          <van-col span="12" class="box">
+            <img v-if="item.idimg.length>0" @click="showimg(myLocalHost+item.idimg)" :src="myLocalHost+item.idimg"
+                 alt="">
+            <img v-else src="../../assets/index/no_pic.jpg" alt="">
+            <span class="text-center">身份证</span>
+            <span>反担保人姓名：{{item.name}}</span>
+            <span>反担保人电话：{{item.phone}}</span>
+            <span>反担保人住址：{{item.address}}</span>
+          </van-col>
+        </van-row>
       </div>
 
     </div>
-    <div class="card">
-      <div>反担保</div>
-      <div></div>
-    </div>
+    <van-image-preview
+      v-model="show"
+      :images="images"
+    >
+      <!--<template v-slot:index>第{{ index }}页</template>-->
+    </van-image-preview>
+
   </div>
 </template>
 
 <script>
   import guaranteeItem from '@/components/guarantee/guarateeItem';
   import {queryGuarantee} from '@/api/api';
-  import GroupImg  from '@/components/GroupImg/GroupImg'
+  import GroupImg from '@/components/GroupImg/GroupImg'
 
   export default {
     name: "guaranteeView",
     data() {
       return {
+        show: false,
+        images: [],
         searchType: {
           id: -1,
         },
         isReload: true,
         result: [],
-
+        groupList: [],
+        cguarantee: []
       }
     },
     components: {
@@ -68,8 +97,14 @@
           console.log(res);
           this.isReload = false; //是否重新赋值
           this.result = ret;
+          this.groupList = res.pic_groups;
+          this.cguarantee = res.cguarantee;
         });
       },
+      showimg(img) {
+        this.images = [img]
+        this.show = true
+      }
 
     },
     mounted() {
@@ -96,4 +131,47 @@
     font-weight: bold;
   }
 
+  .imggroup {
+    padding: 0rem 0rem !important;
+  }
+
+  /deep/ .imggroup .tits {
+    font-weight: bold;
+  }
+
+  /deep/ .imggroup .van-dropdown-menu__item {
+    padding-right: 0.5rem;
+  }
+
+  .cguarantee {
+    margin: 1rem 0;
+    /*border-bottom: 1px solid #ececec;*/
+    background: #fff;
+    padding: 1rem 0;
+  }
+
+  .cguarantee div {
+    display: inline-block;
+  }
+
+  .cguarantee span {
+    font-size: 1.1rem;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .box {
+    padding: 0 1rem;
+  }
+
+  .box img {
+    width: 100%;
+    height: 15rem;
+  }
+
+  .right-border {
+    border-right: 0.8px solid #ececec;
+  }
 </style>
