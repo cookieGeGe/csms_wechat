@@ -122,6 +122,9 @@
     width: 100%;overflow-x:scroll;
     margin: 1rem 0;
   }
+  .imgBox img{
+    max-height: 18rem;
+  }
   .imgBox img,
   .imgBox .van-multi-ellipsis--l2{
     width: inherit;

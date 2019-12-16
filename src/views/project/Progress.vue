@@ -111,32 +111,40 @@
               </tbody>
             </table>
           </div>
-          <!--<div>
-            <div>询问人员:</div>
-            <van-row>
-              <van-col>姓名	</van-col>
-              <van-col>电话	</van-col>
-              <van-col>所在班组</van-col>
-              <van-col>到场时间</van-col>
-              <van-col>工资领取情况</van-col>
-            </van-row>
-
-            <van-row v-for="preson ">
-              <van-col>姓名	</van-col>
-              <van-col>电话	</van-col>
-              <van-col>所在班组</van-col>
-              <van-col>到场时间</van-col>
-              <van-col>工资领取情况</van-col>
-            </van-row>
-            <div>进度照片:</div>
-          </div>-->
+          <div class="one-block">
+            <div class="import-text">询问人员:</div>
+            <table class="table person" >
+              <thead>
+                <tr>
+                  <th style="width: 20%">姓名</th>
+                  <th style="width: 25%">电话</th>
+                  <th >班组</th>
+                  <th >时间</th>
+                  <th style="width: 25%">工资领取情况</th>
+                </tr>
+              </thead>
+              <tbody  >
+              <tr v-for="person in prog.person">
+                <td >{{person.name}}</td>
+                <td >{{person.phone}}</td>
+                <td >{{person.class}}</td>
+                <td >{{person.time}}</td>
+                <td >{{person.wage}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        <div class="one-block">
+          <div class="import-text">进度图片:</div>
+          <ProgressImg :groupList="prog.pics"></ProgressImg>
+        </div>
       </van-col>
     </van-row>
 
 </template>
 
 <script>
-  //import {projectTypeArr, projectBadArr}  from '@/utils/type'
+  import ProgressImg  from '@/components/GroupImg/ProgressImg'
   import {queryProgress}  from '@/api/api'
 
   export default {
@@ -149,7 +157,9 @@
       }
     },
     props: ['progress', 'yearlist'],
-    components: {},
+    components: {
+      ProgressImg
+    },
     methods: {
       progresser(id, is_input, event){
         if (!is_input) return;
@@ -157,22 +167,27 @@
         eAct.setAttribute("class", "");
         var el = event.currentTarget;
         el.setAttribute("class", "act");
+        queryProgress({"id": id}).then(res => {
+          this.prog=res.progress;
+        })
       },
       openers(key,event){
         var el = event.currentTarget;
         var monthCont = el.nextElementSibling;
-        console.log(monthCont);
         if (monthCont.style.display == 'none') {
           monthCont.style.display = 'block'
         } else {
           monthCont.style.display = 'none'
         }
+      },
+      init(){
+        this.yearData = this.yearlist;
+        this.prog = this.progress;
+        this.percentage=parseInt(this.prog.percent)>=100?100:parseInt(this.prog.percent);
       }
     },
     mounted(){
-      this.yearData = this.yearlist;
-      this.prog = this.progress;
-      this.percentage=parseInt(this.prog.percent)>=100?100:parseInt(this.prog.percent)
+      this.init()
     },
   }
 </script>
@@ -185,15 +200,10 @@
     padding: .5rem;
   }
 
-  .monthCont {
-
-  }
-
   .monthCont div {
     margin: .5rem 0;
     color: #888888;
   }
-
 
   .monthCont .circle+span{
     color: #3c3c3c;
@@ -207,6 +217,9 @@
     border-radius: 50%;
     margin-right: .5rem;
   }
+  .act{
+    background: #8eaccc;
+  }
   .bad{
     color: #d9aa60;
   }
@@ -216,6 +229,7 @@
   .import-text{
     font-size: 1.2rem;
     font-weight: bold;
+    margin-bottom: .5rem;
   }
   .one-block{
     border-bottom: 1px solid #ececec;
@@ -225,14 +239,25 @@
   .table{
     border-spacing: 0px;
     border-collapse: collapse;
-    width: 100%;margin-top: 1px;
+    width: 95%;margin-top: 1px;
   }
-  .table tr td{
+  .table tr td,table{
     border: 1px solid #3c3c3c;
     padding-left: .5rem;
     font-weight: bold;
   }
   .table tr td span{
     font-weight: normal;
+  }
+  .table.person tr th{
+    font-weight: bold;
+    border: 1px solid #ececec;
+  }
+  .table.person tr th,.table.person tr td{
+    border: 1px solid #ececec;
+    padding-left: 0;
+    font-weight: normal;
+    text-align: center;
+    font-size: .3rem;
   }
 </style>
