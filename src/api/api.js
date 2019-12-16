@@ -205,7 +205,7 @@ export function queryBank(params) {
     })
 }
 
-// 工资查询
+// 银行月份查询
 export function queryBankInfo(params) {
 /*
     params = {

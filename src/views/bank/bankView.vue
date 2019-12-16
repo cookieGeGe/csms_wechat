@@ -1,59 +1,40 @@
 <template>
   <div class="van-content">
     <div class="card">
-      <bankItem :isReload="isReload" :result="this.result"></bankItem>
+      <bankItem :isReload="isReload" :result="result"></bankItem>
     </div>
     <div class="card">
-      <div class="info">
-        <span>所在地详情</span>
-        <span>{{result.address || '无'}}</span>
-      </div>
-      <div class="info">
-        <span>担保公司信息</span>
-        <span>担保公司：{{result.guacompany}}</span>
-        <span>注册资本(万元)：{{result.capital}}</span>
-        <span>企业性质：{{result.nature}}</span>
-      </div>
-      <div class="info">
-        <span>费用信息</span>
-        <span>实际收费(万元)：{{result.realac}}</span>
-        <span>保证金比例：{{result.marginratio || 0}}%</span>
-        <span>保证金：{{result.margin}}%</span>
-        <span>总费率：{{result.totalrate || 0}}%</span>
-        <span>总收费金额(万元)：{{result.total}}</span>
-      </div>
-      <div class="info">
-        <GroupImg :groupList="groupList"></GroupImg>
-      </div>
-      <div class="info">
-        <span>备注</span>
-        <span>{{result.description || '无'}}</span>
-
-      </div>
-
-      <div class="info">
-        <span>反担保</span>
-        <van-row class="cguarantee" v-for="(item, index) in cguarantee" :key="index">
-          <van-col span="12" class="box right-border">
-            <img v-if="item.pimg.length>0" @click="showimg(myLocalHost+item.pimg)" :src="myLocalHost+item.pimg"
+      <van-row class="progress">
+        <van-col span="4" class="t-center">
+          <div class="year" v-for="(value,key) in yearData">
+            <div class="tit" @click="openers(key,$event)">{{key}}</div>
+            <div class="monthCont" style="display: none;">
+              <div v-for="(month,monthkey) in value" :class="month.is_current?'act':''"
+                   @click="progresser(month.id,month.is_input,$event)">
+                <span :class="month.is_input?'circle':''"></span><span>{{monthkey + 1}}月</span>
+              </div>
+            </div>
+          </div>
+        </van-col>
+        <van-col span="20" class="bankinfo">
+          <div class="title">{{month_bank.year}}年 {{month_bank.month}}月 银行账户信息</div>
+          <div v-if="month_bank.status==0" >支付状态；<van-tag color="#8ec5cc">全额到</van-tag></div>
+          <div v-else-if="month_bank.status==1">支付状态；<van-tag color="#d9aa60">部分到</van-tag></div>
+          <div v-else>支付状态；<van-tag color="#d96c60">未到账</van-tag></div>
+          <div>每月余额；{{month_bank.rpay - month_bank.actualpay}}</div>
+          <div>开卡数：{{month_bank.workers || 0}}</div>
+          <div>当月账户收到金额：{{month_bank.rpay}}</div>
+          <div>总支出金额：{{month_bank.actualpay}}</div>
+          <div class="title">银行回单</div>
+          <div>
+            <img v-if="month_bank.receipt && month_bank.receipt != ''" @click="showimg(myLocalHost+month_bank.receipt)"
+                 :src="myLocalHost+month_bank.receipt"
                  alt="">
             <img v-else src="../../assets/index/no_pic.jpg" alt="">
-            <span class="text-center">房产证</span>
-            <span>产权比例：{{item.proportion}}</span>
-            <span>房屋面积(平米)：{{item.area}}</span>
-            <span>房产价值：{{item.value}}</span>
-          </van-col>
-          <van-col span="12" class="box">
-            <img v-if="item.idimg.length>0" @click="showimg(myLocalHost+item.idimg)" :src="myLocalHost+item.idimg"
-                 alt="">
-            <img v-else src="../../assets/index/no_pic.jpg" alt="">
-            <span class="text-center">身份证</span>
-            <span>反担保人姓名：{{item.name}}</span>
-            <span>反担保人电话：{{item.phone}}</span>
-            <span>反担保人住址：{{item.address}}</span>
-          </van-col>
-        </van-row>
-      </div>
+          </div>
+          <div v-if="month_bank.receipt && month_bank.receipt != ''">上传时间 {{month_bank.rectime}}</div>
+        </van-col>
+      </van-row>
 
     </div>
     <van-image-preview
@@ -68,8 +49,7 @@
 
 <script>
   import bankItem from '@/components/bank/bankItem';
-  import {queryBank} from '@/api/api';
-  import GroupImg from '@/components/GroupImg/GroupImg'
+  import {queryBank, queryBankInfo} from '@/api/api';
 
   export default {
     name: "guaranteeView",
@@ -82,28 +62,57 @@
         },
         isReload: true,
         result: [],
-        groupList: [],
-        cguarantee: []
+        yearData: {},
+        month_bank: {},
       }
     },
     components: {
-      bankItem,
-      GroupImg
+      bankItem
     },
     methods: {
       reload() {
-        queryBank(this.searchType).then(res => {
+        queryBank(this.searchType).then((res) => {
           var ret = res.project;
           console.log(res);
           this.isReload = false; //是否重新赋值
-          this.result = ret;
-          this.groupList = res.pic_groups;
-          this.cguarantee = res.cguarantee;
+          this.result = [ret,];
+          this.yearData = res.allmonth;
+          this.month_bank = res.bankinfo;
+          console.log(this.month_bank)
+          // if (this.month_bank.receipt == '') {
+          //   this.month_bank.rectime = ''
+          // }
         });
       },
       showimg(img) {
         this.images = [img];
         this.show = true;
+      },
+      progresser(id, is_input, event) {
+        if (!is_input) return;
+        var eAct = document.getElementsByClassName('act')[0];
+        eAct.setAttribute("class", "");
+        var el = event.currentTarget;
+        el.setAttribute("class", "act");
+        this.load_month_bank(id)
+      },
+      openers(key, event) {
+        var el = event.currentTarget;
+        var monthCont = el.nextElementSibling;
+        console.log(monthCont);
+        if (monthCont.style.display == 'none') {
+          monthCont.style.display = 'block'
+        } else {
+          monthCont.style.display = 'none'
+        }
+      },
+      load_month_bank(id) {
+        queryBankInfo({id,}).then((res) => {
+          this.month_bank = res.bankinfo;
+          // if (this.month_bank.receipt == '') {
+          //   this.month_bank.rectime = ''
+          // }
+        })
       }
 
     },
@@ -120,15 +129,19 @@
     font-size: 1.1rem !important;
   }
 
-  .info span {
+  .bankinfo div {
     display: block;
     font-size: 1.2rem;
     line-height: 2.5rem;
   }
 
-  .info span:first-child {
+  .bankinfo .title {
     font-size: 1.3rem;
     font-weight: bold;
+  }
+  .bankinfo img {
+    width: 70%;
+    max-height: 18rem;
   }
 
   .imggroup {
@@ -173,5 +186,38 @@
 
   .right-border {
     border-right: 0.8px solid #ececec;
+  }
+
+  .t-center {
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: .5rem;
+  }
+
+  .monthCont {
+
+  }
+
+  .monthCont div {
+    margin: .5rem 0;
+    color: #888888;
+  }
+
+  .monthCont .circle + span {
+    color: #3c3c3c;
+  }
+
+  .circle {
+    display: inline-block;
+    height: .6rem;
+    width: .6rem;
+    vertical-align: middle;
+    background: #8ec5cc;
+    border-radius: 50%;
+    margin-right: .5rem;
+  }
+
+  .act {
+    background: #8eaccc;
   }
 </style>

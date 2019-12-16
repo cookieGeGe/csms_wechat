@@ -16,6 +16,9 @@ import guaranteeView from '@/views/guarantee/guaranteeView'
 import bank from '@/views/bank/bank'
 import bankView from '@/views/bank/bankView'
 
+import wage from '@/views/wage/wage'
+import wageView from '@/views/wage/wageView'
+
 import Search from '@/components/areas/Search'
 
 Vue.use(Router);
@@ -92,6 +95,16 @@ export default new Router({
       path: '/bankView',
       name: 'bankView',
       component: bankView
+    },
+    {
+      path: '/wage',
+      name: 'wage',
+      component: wage
+    },
+    {
+      path: '/wageView',
+      name: 'wageView',
+      component: wageView
     },
   ]
 })

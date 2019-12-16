@@ -15,7 +15,7 @@
     <van-popup v-model="show" position="bottom">
       <van-datetime-picker
         v-model="currentDate"
-        type="date"
+        type="year-month"
         :min-date="minDate"
         @confirm="confirms"
         @cancel="show = false"
