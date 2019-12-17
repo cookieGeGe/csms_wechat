@@ -21,10 +21,10 @@
           <div v-if="month_bank.status==0" >支付状态；<van-tag color="#8ec5cc">全额到</van-tag></div>
           <div v-else-if="month_bank.status==1">支付状态；<van-tag color="#d9aa60">部分到</van-tag></div>
           <div v-else>支付状态；<van-tag color="#d96c60">未到账</van-tag></div>
-          <div>每月余额；{{month_bank.rpay - month_bank.actualpay}}</div>
-          <div>开卡数：{{month_bank.workers || 0}}</div>
-          <div>当月账户收到金额：{{month_bank.rpay}}</div>
-          <div>总支出金额：{{month_bank.actualpay}}</div>
+          <div>每月余额；{{month_bank.rpay - month_bank.actualpay||'0'}}</div>
+          <div>开卡数：{{month_bank.workers || '0'}}</div>
+          <div>当月账户收到金额：{{month_bank.rpay||'0'}}</div>
+          <div>总支出金额：{{month_bank.actualpay || '0'}}</div>
           <div class="title">银行回单</div>
           <div>
             <img v-if="month_bank.receipt && month_bank.receipt != ''" @click="showimg(myLocalHost+month_bank.receipt)"
@@ -140,7 +140,7 @@
     font-weight: bold;
   }
   .bankinfo img {
-    width: 70%;
+    width: 85%;
     max-height: 18rem;
   }
 
