@@ -58,7 +58,7 @@
                   inactive-color="#3c3c3c"
                   style="background: transparent;height: 6rem"
       >
-        <van-tabbar-item name="salary" to="/Salary">
+        <van-tabbar-item name="salary" to="/salary">
           <span>工资查询</span>
           <img slot="icon" src="../assets/index/index_icon5.png">
         </van-tabbar-item>

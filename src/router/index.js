@@ -97,13 +97,13 @@ export default new Router({
       component: bankView
     },
     {
-      path: '/wage',
-      name: 'wage',
+      path: '/salary',
+      name: 'salary',
       component: wage
     },
     {
-      path: '/wageView',
-      name: 'wageView',
+      path: '/salaryView',
+      name: 'salaryView',
       component: wageView
     },
   ]

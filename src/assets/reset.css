@@ -193,3 +193,11 @@ template中最大的div
 .ft-weight {
   font-weight: bold;
 }
+
+.yellow-c {
+  color: #d9aa60;
+}
+
+.warn-c {
+  color: #d96c60;
+}
