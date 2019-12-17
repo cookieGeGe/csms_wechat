@@ -7,7 +7,6 @@
           <van-col span="4" style="text-align: right">
             <van-tag color="#8ec5cc" v-if="item.hasbadrecord <=1">{{companyBad(item.hasbadrecord)}}</van-tag>
             <van-tag color="#d9aa60" v-else>{{companyBad(item.hasbadrecord)}}</van-tag>
-
           </van-col>
         </van-row>
         <van-row type="flex" align="center" justify="space-between">

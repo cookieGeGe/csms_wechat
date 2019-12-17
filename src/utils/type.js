@@ -169,7 +169,17 @@ export const laborEduArr=[
   {text:'硕士',value:5},
   {text:'博士',value:6},
 ];
-
+export function laborEdu(data) {
+  switch (parseInt(data)){
+    case 0:return '无'; break;
+    case 1:return '小学'; break;
+    case 2:return '初中';break;
+    case 3:return '高中'; break;
+    case 4:return '大学'; break;
+    case 5:return '硕士'; break;
+    case 6:return '博士'; break;
+  }
+}
 //不良
 export function laborIsbadrecord(data) {
   switch (parseInt(data)) {

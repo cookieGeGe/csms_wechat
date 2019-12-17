@@ -14,7 +14,8 @@
       <div class="imgBox">
         <div :style="styless[j]" >
           <div v-for="(img,index) in imgLists[j]"  @click="showImages(imgLists[j])" style="width: 15rem;float: left;margin-right: 1rem">
-            <img :src="myLocalHost+img.url" /><!-- onerror="this.style.display = 'none' "-->
+            <img  v-if="img.url!=''" :src="myLocalHost+img.url" />
+            <img v-else src="../../assets/index/no_pic.jpg" alt="">
             <div class="van-multi-ellipsis--l2 t-center">{{img.name}}</div>
           </div>
         </div>

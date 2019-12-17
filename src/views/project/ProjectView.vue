@@ -93,8 +93,8 @@
     },
     methods: {
       init(){
-       // if(!this.id) return;
-        this.id=3;
+        if(!this.id) return;
+        //this.id=3;
         queryProject({"id": this.id}).then(res => {
           this.item = res.project;
           this.item.ownermanager= this.item.ownermanager.replace(/,/,"<br/>");

@@ -2,11 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/views/Login'
 import Main from '@/views/Main'
+
 import Company from '@/views/company/Company'
 import CompanyView from '@/views/company/CompanyView'
+
 import Project from '@/views/project/Project'
 import ProjectView from '@/views/project/ProjectView'
+
 import Labor from '@/views/labor/Labor'
+import LaborView from '@/views/labor/LaborView'
 
 import Help from '@/views/help/Help'
 import helpView from '@/views/help/helpView'
@@ -64,6 +68,11 @@ export default new Router({
       path: '/ProjectView',
       name: 'ProjectView',
       component: ProjectView
+    },
+    {
+      path: '/LaborView',
+      name: 'LaborView',
+      component: LaborView
     },
 
     {

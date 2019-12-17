@@ -36,7 +36,7 @@
           </div>
           <div class="one-block">
             <div class="import-text">工程巡查情况:</div>
-            <div>{{prog.content}}</div>
+            <div style="padding-right:.5rem">{{prog.content}}</div>
           </div>
 
           <van-row class="one-block">
@@ -194,6 +194,9 @@
 
 
 <style scoped>
+  .progress{
+    padding-right: .5rem;
+  }
   .t-center {
     font-weight: bold;
     font-size: 1.2rem;

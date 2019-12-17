@@ -9,7 +9,8 @@
       <div class="imgBox">
         <div :style="styless[j]"  @click="showImages(item.list)">
           <div v-for="(img,index) in item.list"  style="width: 15rem;float: left;margin-right: 1rem">
-            <img :src="minSrc(img.purl)" />
+            <img  v-if="img.purl!=''" :src="minSrc(img.purl)" />
+            <img v-else src="../../assets/index/no_pic.jpg" alt="">
             <div class="van-multi-ellipsis--l2 t-center">{{img.text}}</div>
           </div>
         </div>

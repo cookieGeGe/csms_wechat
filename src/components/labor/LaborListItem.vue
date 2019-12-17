@@ -1,6 +1,7 @@
 <template>
   <div class="laborlistitem">
     <div v-for="item in results"
+         @click="toView(item.id)"
          style="border-bottom: 1px solid #ececec;padding:.5rem .5rem 1rem  .5rem">
       <van-row type="flex" align="center" justify="space-between">
         <van-col span="5" style="overflow: hidden;">
@@ -24,9 +25,9 @@
             <van-tag color="#8ec5cc">{{item.age}} </van-tag>
             <van-tag v-if="item.isbadrecord>0" color="#d9aa60">{{laborIsbadrecord(item.isbadrecord)}} </van-tag>
           </div>
-          <div>{{item.pid}}-{{item.did}}-{{item.cid}}</div>
-          <div class="van-ellipsis">项目名称:<span class="mianColor">{{item.project}}</span></div>
-          <div class="van-ellipsis">所属企业:<span class="mianColor">{{item.company}}</span></div>
+          <div>{{item.pname}}-{{item.dname}}-{{item.cname}}</div>
+          <div class="van-ellipsis">项目名称:<span class="mianColor">{{item.projectname}}</span></div>
+          <div class="van-ellipsis">所属企业:<span class="mianColor">{{item.companyname}}</span></div>
         </van-col>
       </van-row>
     </div>
@@ -37,7 +38,7 @@
 <script>
   import {laborSex, laborJob, laborIsbadrecord, getMinImage}  from '@/utils/type'
   export default {
-    name: 'CompnayListItem',
+    name: 'LaborListItem',
     data () {
       return {
         laborSex,
@@ -45,6 +46,16 @@
         laborIsbadrecord,
         getMinImage,
         results: []
+      }
+    },
+    methods:{
+      toView(id){
+        this.$router.push({
+          name:'LaborView',
+          params:{
+            id
+          },
+        });
       }
     },
     props: ['result', 'isReload'],
