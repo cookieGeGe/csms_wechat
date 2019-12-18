@@ -23,6 +23,11 @@ import bankView from '@/views/bank/bankView'
 import wage from '@/views/wage/wage'
 import wageView from '@/views/wage/wageView'
 
+import Attend from '@/views/attend/Attend'
+import AttendView from '@/views/attend/AttendView'
+
+
+
 import Search from '@/components/areas/Search'
 
 Vue.use(Router);
@@ -114,6 +119,16 @@ export default new Router({
       path: '/salaryView',
       name: 'salaryView',
       component: wageView
+    },
+    {
+      path: '/Attend',
+      name: 'Attend',
+      component: Attend
+    },
+    {
+      path: '/AttendView',
+      name: 'AttendView',
+      component: AttendView
     },
   ]
 })
