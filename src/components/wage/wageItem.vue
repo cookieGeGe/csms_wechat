@@ -41,7 +41,7 @@
         results: [],
       }
     },
-    props: ['result', 'isReload'],
+    props: ['result', 'isReload', 'total'],
     methods: {
       toView(id) {
         this.$router.push({
@@ -62,6 +62,11 @@
         if (a) {
           this.results = []
         }
+      },
+      total:function (a, b) {
+        console.log(this.results, a)
+        this.results[0].total = a
+        console.log(this.results)
       }
     }
   }

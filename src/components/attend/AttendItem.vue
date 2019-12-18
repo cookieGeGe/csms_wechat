@@ -20,8 +20,8 @@
             <div>{{item.classname}}(班组)</div>
         </van-col>
         <van-col span="5" class="t-center">
-          <div>¥ {{item.total}}</div>
-          <div>实发工资</div>
+          <div style="font-size: 1.3rem;">{{item.punch}}天</div>
+          <div class="yellow-c">{{item.unpunch-item.punch}}未打卡</div>
 
         </van-col>
       </van-row>
