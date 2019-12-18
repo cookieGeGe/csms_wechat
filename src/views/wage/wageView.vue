@@ -1,7 +1,9 @@
 <template>
   <div class="van-content">
+    <Calendar ref="Calendar" v-on:choseDay="clickDay"
+              v-on:changeMonth="changeDate"></Calendar>
     <div class="card">
-      <salaryItem :isReload="isReload" :result="result"></salaryItem>
+      <salaryItem :isReload="isReload" :result="result" :total="total"></salaryItem>
     </div>
     <div class="card info">
       <van-row>
@@ -53,7 +55,8 @@
 
 <script>
   import salaryItem from '@/components/wage/wageItem';
-  import {querySalary} from '@/api/api';
+  import Calendar from 'vue-calendar-component';
+  import {querySalary, querySalaryNext} from '@/api/api';
 
   export default {
     name: "guaranteeView",
@@ -64,15 +67,51 @@
         searchType: {
           id: -1,
         },
+        total:'',
         isReload: true,
         result: [],
         info: {},
       }
     },
     components: {
-      salaryItem
+      salaryItem,
+      Calendar
     },
     methods: {
+      clickDay(data) {
+        console.log(data); //选中某天
+      },
+      changeDate(data) {
+        // console.log(data); //左右点击切换月份
+        if (JSON.stringify(this.info) != '{}') {
+          var params = {
+            id: this.info.laborid,
+            month: data.replace(/\//g, '-')
+          }
+          querySalaryNext(params).then((res) => {
+            var ret = res.data;
+            if (ret.length==0){
+              this.$toast('没有找到工资信息！');
+              this.total = 0
+              this.info.unit = 0
+              this.info.swipe = 0
+              this.info.manual = 0
+              this.info.basicwage = 0
+              this.info.overtime = 0
+              this.info.subtotal = 0
+              this.info.raward = 0
+              this.info.deduction = 0
+              this.info.total = 0
+            } else {
+              console.log(res);
+              this.total = ret[0].total;
+              this.info = ret[0];
+            }
+
+          })
+        }
+
+      },
       formatter_type(type) {
         if (parseInt(type) == 1) {
           return '合同工'
@@ -86,6 +125,7 @@
           this.isReload = false; //是否重新赋值
           this.result = ret;
           this.info = ret[0];
+          this.$refs.Calendar.ChoseMonth(this.info.year + '-' + this.info.month + '-1');
           // if (this.month_bank.receipt == '') {
           //   this.month_bank.rectime = ''
           // }
@@ -105,6 +145,14 @@
 </script>
 
 <style scoped>
+  /deep/ .wh_content {
+    display: none;
+  }
+
+  /deep/ .wh_content_all {
+    background-color: rgba(255, 255, 255, 0);
+  }
+
   .card {
     padding: 0.5rem 0.5rem;
     font-size: 1.1rem !important;
@@ -113,6 +161,7 @@
   .show-inline {
     display: inline-block;
   }
+
   /deep/ .info .van-col {
     padding: 1rem;
     line-height: 2rem;

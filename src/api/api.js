@@ -167,7 +167,7 @@ export function queryAttendInfo(params) {
     })
 }
 
-// 考勤查询
+// 工资查询
 export function querySalary(params) {
 /*
     params = {
@@ -184,6 +184,21 @@ export function querySalary(params) {
         method: 'get',
         params: params
     })
+}
+
+// 工资下一个月查询
+export function querySalaryNext(params) {
+  /*
+      params = {
+          id: 'int    劳工ID
+          month: 'str		查询考勤年月格式为：xxxx-xx（type为labor时有效）',
+      }
+  */
+  return request({
+    url: '/wechat/query/salary/next',
+    method: 'get',
+    params: params
+  })
 }
 
 // 银行查询
