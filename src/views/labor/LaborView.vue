@@ -134,8 +134,8 @@
     },
     methods: {
       init(){
-        //if(!this.id) return;
-        this.id=55;
+        if(!this.id) return;
+        //this.id=55;
         queryLabor({"id": this.id}).then(res => {
           this.item = res.labor;
           this.groupList=res.pic_groups;
