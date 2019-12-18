@@ -4,24 +4,18 @@
          @click="toView(item.id)"
          style="border-bottom: 1px solid #ececec;padding:.5rem .5rem 1rem .5rem;">
       <van-row class="tit" type="flex" align="center">
-        <van-col span="9">
-          <div>{{item.name}} [{{item.phone}}]</div>
-          <div>{{item.idcard}}</div>
-          <div>
-            <van-tag color="#8eaccc">{{laborJob(item.jobtype)}}</van-tag>
-            <van-tag color="#8ec5cc">{{laborSex(item.sex)}}</van-tag>
-            <van-tag color="#8ec5cc">{{item.nationality}}</van-tag>
-            <van-tag color="#8eaccc">{{item.age}}</van-tag>
-          </div>
+        <van-col span="14">
+          <div>{{item.name}}</div>
         </van-col>
-        <van-col span="10">
-            <div class="van-multi-ellipsis--l2 mini-line-height">{{item.projectname}}</div>
-            <div class="van-multi-ellipsis--l2 mini-line-height">{{item.companyname}}</div>
-            <div>{{item.classname}}(班组)</div>
+        <van-col span="5">
+            <div style="text-align: center">{{item.date}}</div>
+            <div style="text-align: center">{{item.info}}</div>
         </van-col>
         <van-col span="5" class="t-center">
-          <div>¥ {{item.total}}</div>
-          <div>实发工资</div>
+          <div style="font-weight: unset;">
+            <span style="font-size: 1.3rem; font-weight: bold">{{item.punch}}</span> /
+            <span style="font-size: 1rem;">{{item.total}}</span></div>
+          <div class="yellow-c">{{item.unpunch}}未打卡</div>
 
         </van-col>
       </van-row>
@@ -70,6 +64,7 @@
   .gualistitem {
     color: #3c3c3c;
     padding: 0 .5rem;
+    font-size: 1.2rem;
   }
 
   .gualistitem .tit .van-col--20 {
