@@ -46,8 +46,8 @@
     methods: {
       toView(id) {
         this.$router.push({
-          name: 'GuaView',
-          params: {
+          path: '/GuaView',
+          query: {
             id
           },
         });

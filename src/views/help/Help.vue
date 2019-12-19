@@ -57,8 +57,8 @@
     methods: {
       goto(id) {
         this.$router.push({
-          name: 'helpView',
-          params: {
+          path: '/helpView',
+          query: {
             id
           },
         });

@@ -120,10 +120,10 @@
     },
     created() {
       this.loadDropDown();
-      localStorage.setItem('searchParams', JSON.stringify(this.$route.params));
+      localStorage.setItem('searchParams', JSON.stringify(this.$route.query));
     },
     mounted() {
-      this.searchObj(this.$route.params)
+      this.searchObj(this.$route.query)
     }
   }
 </script>

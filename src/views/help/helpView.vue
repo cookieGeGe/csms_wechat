@@ -96,7 +96,7 @@
       }
     },
     created() {
-      this.params.id = this.$route.params.id
+      this.params.id = this.$route.query.id
     },
     mounted() {
       this.query()

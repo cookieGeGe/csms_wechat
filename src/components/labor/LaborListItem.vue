@@ -51,8 +51,8 @@
     methods:{
       toView(id){
         this.$router.push({
-          name:'LaborView',
-          params:{
+          path:'/LaborView',
+          query:{
             id
           },
         });

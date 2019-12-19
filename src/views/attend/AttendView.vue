@@ -7,26 +7,41 @@
       >
     </Calendar>
     <div class="card">
-      <AttendItem :isReload="isReload" :result="result[index]"></AttendItem>
+      <AttendItem :isReload="isReload" :isone="true" :result="labor"></AttendItem>
     </div>
 
     <div class="attend" >
-      <h3 style="font-size: 1.4rem">{{dayData.year}}-{{dayData.month}}-{{dayData.day}} 考勤明细</h3>
+      <h3 style="font-size: 1.4rem">
+        {{dayData.year}}-{{dayData.month}}-{{dayData.day}} 考勤明细
+
+      </h3>
       <van-row type="flex" align="center" >
         <van-col span="3" class="t-center"><div>上</div>午</van-col>
         <van-col>
-          <div class="time">上班: {{dayData.amin}}</div>
+          <div class="time">上班:
+            <span v-if="dayData.amin&&dayData.amin.length>0">{{dayData.amin}}</span>
+            <span v-else style="color: #d9aa60">未打卡</span>
+          </div>
           <div>打卡地址:{{dayData.aminpos}}</div>
-          <div class="time">下班: {{dayData.amout}}</div>
+          <div class="time">下班:
+            <span v-if="dayData.amout&&dayData.amout.length>0">{{dayData.amout}}</span>
+            <span v-else style="color: #d9aa60">未打卡</span></div>
           <div>打卡地址:{{dayData.amoutpos}}</div>
         </van-col>
       </van-row>
       <van-row type="flex" align="center">
         <van-col span="3"  class="t-center"><div>下</div>午</van-col>
         <van-col>
-          <div class="time">上班: {{dayData.pmin}}</div>
+          <div class="time">上班:
+            <span v-if="dayData.pmin&&dayData.pmin.length>0">{{dayData.pmin}}</span>
+            <span v-else style="color: #d9aa60">未打卡</span>
+
+          </div>
           <div>打卡地址:{{dayData.pmoutpos}}</div>
-          <div class="time">下班: {{dayData.pmout}}</div>
+          <div class="time">下班:
+            <span v-if="dayData.pmout&&dayData.pmout.length>0">{{dayData.pmout}}</span>
+            <span v-else style="color: #d9aa60">未打卡</span>
+          </div>
           <div >打卡地址:{{dayData.pmoutpos}}</div>
         </van-col>
       </van-row>
@@ -45,15 +60,13 @@
     data() {
       return {
         searchType: {
-          id:55,
-          year:2019,
-          month:7,
+
         },
         isReload: true,
         result: [],
         nolist:[],
-        index:0,
         dayData:{},
+        labor:[]
       }
     },
     components: {
@@ -66,7 +79,6 @@
         this.result.forEach((val,index,arr)=>{
           if(parseInt(val.day)==day){
             this.dayData=val;
-            this.index=index;
           }
         });
       },
@@ -80,36 +92,40 @@
         this.reload();
       },
       reload() {
+        this.changeDates=false;
+        this.$refs.Calendar.ChoseMonth(this.searchType.year+'-'+this.searchType.month,false);
+        setTimeout(()=>{
+          this.changeDates=true
+        },500);
         queryAttendInfo(this.searchType).then((res) => {
-          this.changeDates=false;
-          this.$refs.Calendar.ChoseMonth(this.searchType.year+'-'+this.searchType.month,false);
-          setTimeout(()=>{
-            this.changeDates=true
-          },500);
           var ret = res.data;
-          this.isReload = false; //是否重新赋值
-          this.result = ret;
-          ret.forEach((val,index,arr)=>{
-            if(val.miss==='缺考'){
+          this.isReload = true; //是否重新赋值
+          if(JSON.stringify(res.labor)!=='[]'){
+              this.labor=res.labor
+          }else{
+             this.labor=[]
+          }
+          if(JSON.stringify(ret)==='[]'){
+            this.$toast('当月没有数据请及时填写');
+            this.dayData={};
+          }else{
+            this.result = ret;
+            this.clickDay(ret[0].year+'/'+ret[0].month+'/'+ret[0].day);
+            ret.forEach((val,index,arr)=>{
+              if(val.miss==='缺考'){
                 this.nolist.push({date:val.year+'/'+val.month+'/'+val.day,className:"mark1"})
-            }else{
-               this.nolist.push({date:val.year+'/'+val.month+'/'+val.day,className:"mark2"})
-            }
-          });
+              }else{
+                this.nolist.push({date:val.year+'/'+val.month+'/'+val.day,className:"mark2"})
+              }
+            });
+          }
         });
-      },
-      showimg(img) {
-        this.images = [img];
-        this.show = true;
       },
 
     },
     mounted() {
+      this.searchType= this.$route.query;
       this.reload();
-
-
-     // this.searchType= this.$route.params;
-      //this.reload();
     }
   }
 </script>

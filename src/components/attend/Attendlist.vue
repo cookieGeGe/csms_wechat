@@ -39,8 +39,8 @@
     methods: {
       toView(id) {
         this.$router.push({
-          name: 'salaryView',
-          params: {
+          path: '/salaryView',
+          query: {
             id
           },
         });
