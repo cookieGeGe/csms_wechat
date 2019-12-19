@@ -167,6 +167,25 @@ export function queryAttendInfo(params) {
     })
 }
 
+// 考勤查询
+export function queryAttendProCom(params) {
+  /*
+      params = {
+          id: 'int	劳工ID',
+          year: 'int		年',
+          month: 'int		月',
+          day: 'int 日',
+          type: 'project|company'
+      }
+  */
+  return request({
+    url: '/wechat/query/attend/otherinfo',
+    method: 'get',
+    params: params
+  })
+}
+
+
 // 工资查询
 export function querySalary(params) {
 /*

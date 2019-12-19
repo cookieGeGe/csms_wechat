@@ -1,15 +1,15 @@
 <template>
   <div class="gualistitem">
     <div v-for="item in results"
-         @click="toView(item.id)"
+         @click="toView(item.id, item.date, item.name)"
          style="border-bottom: 1px solid #ececec;padding:.5rem .5rem 1rem .5rem;">
       <van-row class="tit" type="flex" align="center">
         <van-col span="14">
           <div>{{item.name}}</div>
         </van-col>
         <van-col span="5">
-            <div style="text-align: center">{{item.date}}</div>
-            <div style="text-align: center">{{item.info}}</div>
+          <div style="text-align: center">{{item.date}}</div>
+          <div style="text-align: center">{{item.info}}</div>
         </van-col>
         <van-col span="5" class="t-center">
           <div style="font-weight: unset;">
@@ -33,15 +33,20 @@
         laborJob,
         laborSex,
         results: [],
+        type:''
       }
     },
-    props: ['result', 'isReload'],
+    props: ['result', 'isReload', 'type'],
     methods: {
-      toView(id) {
+      toView(id, date, name) {
+        console.log(id,date,name,this.type)
         this.$router.push({
-          name: 'salaryView',
-          params: {
-            id
+          path: '/AttendInfo',
+          query: {
+            id,
+            date,
+            name,
+            type:this.type,
           },
         });
       }
@@ -55,6 +60,11 @@
       isReload: function (a, b) {
         if (a) {
           this.results = []
+        }
+      },
+      type:function (a, b) {
+        if (a){
+          this.type = a
         }
       }
     }
@@ -73,7 +83,8 @@
     font-weight: bold;
     color: #3c3c3c;
   }
-  .t-center div:first-child{
+
+  .t-center div:first-child {
     font-weight: bold;
   }
 

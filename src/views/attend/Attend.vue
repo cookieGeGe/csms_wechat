@@ -43,7 +43,7 @@
             @load="onLoad"
             :immediate-check="false"
           >
-            <Attendlist :isReload="pro_isReload" :result="pro_result"></Attendlist>
+            <Attendlist :isReload="pro_isReload" :result="pro_result" type="project"></Attendlist>
           </van-list>
         </div>
 
@@ -67,7 +67,7 @@
             @load="onLoad"
             :immediate-check="false"
           >
-            <Attendlist :isReload="com_isReload" :result="com_result"></Attendlist>
+            <Attendlist :isReload="com_isReload" :result="com_result" type="company"></Attendlist>
           </van-list>
         </div>
       </van-tab>
@@ -77,7 +77,7 @@
             查询结果( <span style="color: #8ec5cc; font-size: 1.5rem;">{{total}}</span> 条)
           </div>
           <div class="header">
-            <van-row align="center">
+            <van-row type="flex" align="center" justify="space-around">
               <van-col span="9">劳工信息</van-col>
               <van-col span="10">项目/企业/班组</van-col>
               <van-col span="5">考勤统计</van-col>

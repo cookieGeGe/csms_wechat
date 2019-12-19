@@ -3,7 +3,7 @@
     <div v-for="item in results"
          @click="toView(item.id)"
          style="border-bottom: 1px solid #ececec;padding:.5rem .5rem 1rem .5rem;">
-      <van-row class="tit" type="flex" align="center">
+      <van-row class="tit" type="flex" align="center" justify="space-around">
         <van-col span="9">
           <div>{{item.name}} [{{item.phone}}]</div>
           <div>{{item.idcard}}</div>

@@ -25,6 +25,7 @@ import wageView from '@/views/wage/wageView'
 
 import Attend from '@/views/attend/Attend'
 import AttendView from '@/views/attend/AttendView'
+import AttendInfo from '@/components/attend/AttendInfo'
 
 
 
@@ -129,6 +130,11 @@ export default new Router({
       path: '/AttendView',
       name: 'AttendView',
       component: AttendView
+    },
+    {
+      path: '/AttendInfo',
+      name: 'AttendInfo',
+      component: AttendInfo
     },
   ]
 })
