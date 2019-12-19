@@ -37,15 +37,19 @@
               工资标准:<span>{{item.isfeestand?'临时工':'合同工'}} {{item.feestand}}</span>
             </van-col>
           </van-row>
-          <van-row>
+          <van-row type="flex" >
             <van-col span="8">
                是否不良: <van-tag color="#8eaccc" v-if="item.isbadrecord==0">否</van-tag>
                <van-tag color="#d9aa60" v-else="item.isbadrecord==1">不良</van-tag>
                <van-tag color="#d9aa60" v-if="item.isbadrecord==2">黑名单</van-tag>
             </van-col>
-            <van-col>
+            <van-col  span="8" style="text-align: left">
               是否培训:<span>{{item.train?'是':'否'}}</span>
             </van-col>
+            <van-col  span="8" style="text-align: right">
+              <van-tag color="#8eaccc" @click="file(item.name,item.id)">导出</van-tag>
+            </van-col>
+
           </van-row>
         </div>
         <div class="ablock">
@@ -87,7 +91,6 @@
                     title-inactive-color="#5e5e5e"
                     title-active-color="#5e5e5e"
                     class="details"
-                    @click="changeCont"
           >
             <van-tab title="分组图片" >
               <GroupImg :groupList="groupList"></GroupImg>
@@ -149,13 +152,13 @@
             ]);
           }
       },
-      /*file(){
-        var href=this.myLocalHost+'/template/export?type=word&ft=company&id='+this.item.id;
-        window.open(href,this.item.name);
-      }*/
+      file(name,id){
+        var href=this.myLocalHost+'/template/export?type=word&ft=labor&id='+id;
+        window.open(href,name);
+      }
     },
     mounted(){
-      this.id = this.$route.params.id;
+      this.id = this.$route.query.id;
       this.init();
     }
   }

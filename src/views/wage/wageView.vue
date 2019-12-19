@@ -138,7 +138,7 @@
 
     },
     mounted() {
-      this.searchType.id = this.$route.params.id;
+      this.searchType.id = this.$route.query.id;
       this.reload();
     }
   }

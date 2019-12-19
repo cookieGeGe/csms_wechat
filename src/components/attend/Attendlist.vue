@@ -61,11 +61,6 @@
         if (a) {
           this.results = []
         }
-      },
-      type:function (a, b) {
-        if (a){
-          this.type = a
-        }
       }
     }
   }

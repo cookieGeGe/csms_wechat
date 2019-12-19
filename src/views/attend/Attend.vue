@@ -1,22 +1,5 @@
 <template>
   <div class="company">
-
-    <Search @searchObj="searchObj"></Search>
-    <van-row type="flex" align="center" justify="space-between" style="margin: 10px;margin-top: 0;">
-      <van-col @click="show=true">
-        <van-tag round type="primary" color="#8eaccc" style="padding: 3px 1rem">更新时间</van-tag>
-      </van-col>
-    </van-row>
-
-    <van-popup v-model="show" position="bottom">
-      <van-datetime-picker
-        v-model="currentDate"
-        type="year-month"
-        :min-date="minDate"
-        @confirm="confirms"
-        @cancel="show = false"
-      />
-    </van-popup>
     <van-tabs background="transparent"
               color="#fff"
               title-inactive-color="#fff"
@@ -95,7 +78,23 @@
         </div>
       </van-tab>
     </van-tabs>
-
+    <div class="myserach">
+      <Search @searchObj="searchObj"></Search>
+      <van-row type="flex" align="center" justify="space-between" style="margin: 10px;margin-top: 0;">
+        <van-col @click="show=true">
+          <van-tag round type="primary" color="#8eaccc" style="padding: 3px 1rem">更新时间</van-tag>
+        </van-col>
+      </van-row>
+      <van-popup v-model="show" position="bottom">
+        <van-datetime-picker
+          v-model="currentDate"
+          type="year-month"
+          :min-date="minDate"
+          @confirm="confirms"
+          @cancel="show = false"
+        />
+      </van-popup>
+    </div>
 
     <!---->
   </div>
@@ -297,5 +296,15 @@
 
   .guarantee div {
     line-height: 2rem;
+  }
+
+  /deep/ .van-tabs__content{
+    padding-top: 7rem;
+ }
+  .myserach{
+    position: absolute;
+    top: 4.5rem;
+    left: 0;
+    width: 100%;
   }
 </style>

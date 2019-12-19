@@ -1,7 +1,7 @@
 <template>
   <div class="gualistitem">
     <div v-for="item in results"
-         @click="toView(item.id)"
+         @click="toView(item.id,item.year,item.month)"
          style="border-bottom: 1px solid #ececec;padding:.5rem .5rem 1rem .5rem;">
       <van-row class="tit" type="flex" align="center">
         <van-col span="9">
@@ -20,9 +20,8 @@
             <div>{{item.classname}}(班组)</div>
         </van-col>
         <van-col span="5" class="t-center">
-          <div style="font-size: 1.3rem;">{{item.punch}}天</div>
-          <div class="yellow-c">{{item.unpunch-item.punch}}未打卡</div>
-
+          <div style="font-size: 1.3rem;">{{item.punch||0}}天</div>
+          <div class="yellow-c">{{item.unpunch-item.punch||0}}未打卡</div>
         </van-col>
       </van-row>
     </div>
@@ -41,13 +40,15 @@
         results: [],
       }
     },
-    props: ['result', 'isReload'],
+    props: ['result', 'isReload','isone'],
     methods: {
-      toView(id) {
+      toView(id,year,month) {
         this.$router.push({
-          name: 'AttendView',
-          params: {
-            id
+          path: '/AttendView',
+          query: {
+            id,
+            year,
+            month,
           },
         });
       }
@@ -55,7 +56,11 @@
     watch: {                        //监听value的变化，进行相应的操作即可
       result: function (a, b) {       //a是value的新值，b是旧值
         if (a != b) {
-          this.results = this.results.concat(a);
+            if(this.isone){
+              this.results=a;
+            }else{
+              this.results = this.results.concat(a); //数组
+            }
         }
       },
       isReload: function (a, b) {

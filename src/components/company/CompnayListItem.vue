@@ -35,8 +35,8 @@
     methods:{
         toView(id){
           this.$router.push({
-            name:'CompanyView',
-            params:{
+            path:'/CompanyView',
+            query:{
                 id
             },
           });

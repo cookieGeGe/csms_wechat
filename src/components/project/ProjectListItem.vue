@@ -11,6 +11,7 @@
         <van-col span="4" style="text-align: right">
           <van-tag color="#8ec5cc"  v-if="item.status <=1">{{projectBad(item.status)}} </van-tag>
           <van-tag color="#d9aa60" v-else>{{projectBad(item.status)}} </van-tag>
+          <van-tag color="#8eaccc" style="margin-top: .5rem" v-if="daochu" @click="file(item.name,item.id)">导出</van-tag>
         </van-col>
       </van-row>
       <van-row  type="flex" justify="space-between" >
@@ -53,15 +54,19 @@
         results:[]
       }
     },
-    props: ['result', 'isReload'],
+    props: ['result', 'isReload','daochu'],
     methods:{
       toView(id){
         this.$router.push({
-          name:'ProjectView',
-          params:{
+          path:'/ProjectView',
+          query:{
             id
           },
         });
+      },
+      file(name,id){
+          var href=this.myLocalHost+'/template/export?type=word&ft=project&id='+id;
+          window.open(href,name);
       }
     },
     watch: {                        //监听value的变化，进行相应的操作即可

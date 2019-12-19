@@ -41,8 +41,8 @@
     methods: {
       toView(id) {
         this.$router.push({
-          name: 'bankView',
-          params: {
+          path: '/bankView',
+          query: {
             id
           },
         });

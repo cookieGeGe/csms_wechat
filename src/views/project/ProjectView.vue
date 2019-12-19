@@ -1,7 +1,7 @@
 <template>
   <div class="view">
     <div class="title">
-        <ProjectListItem :isDetails="false" :result="this.item" class="cont"></ProjectListItem>
+        <ProjectListItem :daochu="true" :result="this.item" class="cont"></ProjectListItem>
 
       <div class="preson" >
         <van-row type="flex" justify="space-between">
@@ -118,15 +118,15 @@
       },
       toCompany(id){
         this.$router.push({
-          name:'CompanyView',
-          params:{
+          path:'/CompanyView',
+          query:{
             id
           },
         });
       }
     },
     mounted(){
-      this.id = this.$route.params.id;
+      this.id = this.$route.query.id;
       this.init();
     }
   }
