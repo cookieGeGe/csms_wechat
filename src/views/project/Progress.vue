@@ -154,7 +154,6 @@
         prog: {},
         yearData: '',
         percentage:0,
-
       }
     },
     props: ['progress', 'yearlist'],
@@ -191,12 +190,10 @@
       var arrs=localStorage.getItem('permission');
       var rootArr=arrs.split(',');
       if(rootArr.indexOf('progress_show')!=-1){
-        this.init()
+        this.init();
+      } else{
+        this.$toast('没有查看权限，请联系管理员');
       }
-      else{
-          this.$toast('没有查看权限，请联系管理员');
-      }
-
     },
   }
 </script>
