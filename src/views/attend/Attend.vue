@@ -139,6 +139,7 @@
         com_finished: false,
         com_result: [],
         com_result: 0,
+        com_total:0,
       }
     },
     components: {
@@ -299,7 +300,7 @@
   }
 
   /deep/ .van-tabs__content{
-    padding-top: 7rem;
+    padding-top: 6.5rem;
  }
   .myserach{
     position: absolute;

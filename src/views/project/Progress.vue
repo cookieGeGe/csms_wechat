@@ -6,7 +6,7 @@
           <div class="monthCont" style="display: none;">
             <div v-for="(month,monthkey) in value" :class="month.is_current?'act':''"
                  @click="progresser(month.id,month.is_input,$event)">
-              <span :class="month.is_input?'circle':''"></span><span>{{monthkey + 1}}月</span>
+              <span :class="month.is_input?'circle':''"></span><span>{{month.month}}月</span>
             </div>
           </div>
         </div>
