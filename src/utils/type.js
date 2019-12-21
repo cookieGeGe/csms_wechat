@@ -236,8 +236,8 @@ export const rootObj={
   Labor:'labor_show',
   Attend:'attend_show',
   wage:'account_show',
-  Bank:'bank_show',
+  bank:'bank_show',
   Guarantee:'guarantee_show',
-  Help:'help_show:',
+  Help:'help_show',
 };
 

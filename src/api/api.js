@@ -285,7 +285,7 @@ export function queryGuarantee(params) {
     })
 }
 
-// 保函查询
+// 帮助中心查询
 export function queryQuestion(params) {
 /*
     params = {

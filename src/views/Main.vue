@@ -62,7 +62,7 @@
           <span>工资查询</span>
           <img slot="icon" src="../assets/index/index_icon5.png">
         </van-tabbar-item>
-        <van-tabbar-item   @click="myroute('Bank')">
+        <van-tabbar-item   @click="myroute('bank')">
           <span>银行查询</span>
           <img slot="icon" src="../assets/index/index_icon6.png">
         </van-tabbar-item>
@@ -294,6 +294,7 @@
       },
       myroute(name){
         var type=this.rootArr.indexOf(this.rootObj[name]);
+        console.log(this.rootArr)
         if (type!=-1){
           this.$router.push({
             name,

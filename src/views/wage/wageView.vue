@@ -146,11 +146,11 @@
 
 <style scoped>
   /deep/ .wh_content {
-    display: none;
+    display: none !important;
   }
 
   /deep/ .wh_content_all {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0) !important;
   }
 
   .card {
