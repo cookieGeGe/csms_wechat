@@ -52,7 +52,7 @@
 
 
   export default {
-    name: 'Company',
+    name: 'wage',
     data() {
       return {
         show: false,

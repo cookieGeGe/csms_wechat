@@ -230,3 +230,14 @@ export function getMinImage(url){
 }
 
 
+export const rootObj={
+  Company:'company_show',
+  Project:'project_show',
+  Labor:'labor_show',
+  Attend:'attend_show',
+  wage:'account_show',
+  Bank:'bank_show',
+  Guarantee:'guarantee_show',
+  Help:'help_show:',
+};
+
