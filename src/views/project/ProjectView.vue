@@ -109,17 +109,9 @@
           this.year_month_info=res.year_month_info;
         })
       },
-     /* changeCont(tit,name){
-        if (name=='项目进度'){
-          if(this.rootArr.indexOf('progress_show')!=-1){
+      changeCont(tit,name){
 
-          }else{
-            this.progress=[];
-            this.year_month_info=[];
-            this.$toast('没有查看权限，请联系管理员')
-          }
-        }
-      },*/
+      },
       toCompany(id){
         this.$router.push({
           path:'/CompanyView',

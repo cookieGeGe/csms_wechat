@@ -253,7 +253,8 @@
                 oneTab.page++;
               });
             }else{
-              oneTab.loading=true;
+              oneTab.loading=false;
+              oneTab.finished = true;
               this.$toast('没有查看权限，请联系管理员');
             }
 
@@ -268,10 +269,10 @@
                 oneTab.page++;
               });
             }else{
-              oneTab.loading=true;
+              oneTab.loading=false;
+              oneTab.finished = true;
               this.$toast('没有查看权限，请联系管理员');
             }
-
           }else if(oneName=='labor'){
             if(this.rootArr.indexOf('labor_show')!=-1){
               queryLabor(para).then(res => {
@@ -283,7 +284,9 @@
                 oneTab.page++;
               });
             }else{
-              oneTab.loading=true;
+
+              oneTab.loading=false;
+              oneTab.finished = true;
               this.$toast('没有查看权限，请联系管理员');
             }
           }

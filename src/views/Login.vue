@@ -39,6 +39,7 @@
       }
     },
     methods: {
+
       bandLogin() {
         if(this.LoginName.length==0){
           Toast('请输入用户名!');
@@ -60,10 +61,15 @@
              localStorage.setItem('admintype',res.admintype);
              localStorage.setItem('token',res.token);
              localStorage.setItem('permission',res.permission);
-
-             this.$router.push({
-                 path: '/Main',
+             if(this.$route.query.help){
+               this.$router.push({
+                 path: '/Help',
                })
+             }else{
+               this.$router.push({
+                 path: '/Main',
+               });
+             }
           })
         },
 
