@@ -20,6 +20,7 @@
     <van-popup v-model="show" position="bottom">
       <van-area :area-list="areaList" :value="value"
                 @change="onChange"
+                :columns-placeholder="['全部', '全部', '全部']"
                 @confirm="show = false"
                 @cancel="show = false"/>
     </van-popup>
@@ -37,8 +38,8 @@
     data () {
       return {
         show: false,
-        value: '230105',
-        adressName: '成都',
+        value: '0',
+        adressName: '全部',
         areaList: AreaList,
         para: {
           name: '',
@@ -49,8 +50,20 @@
     methods: {
       onChange (picker, value, index) {
         this.para.area = value;
-        this.value = value[value.length - 1].code;
-        this.adressName = value[value.length - 1].name;
+        var n = 0;
+        for (var i=0; i<value.length; i++) {
+          if (value[i]!=undefined && value[i].code != ''){
+            this.value = value[i].code;
+            this.adressName = value[i].name;
+          } else {
+            n++
+          }
+        }
+        if (n==3){
+          this.adressName = '全部';
+          this.value= '0'
+        }
+
       },
       selectArea(){
         this.show = true
