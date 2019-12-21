@@ -33,7 +33,7 @@
         <GroupImg :groupList="groupList"></GroupImg>
       </van-tab>
       <van-tab title="项目进度">
-        <Progress :progress="progress" :yearlist="year_month_info"></Progress>
+        <Progress :progress="progress" :yearlist="year_month_info" ></Progress>
       </van-tab>
       <van-tab title="分包企业">
         <div  v-for="(subcompany,i) in item.subcompany" class="preson" style=" padding: .5rem 2rem" >
@@ -84,6 +84,7 @@
         onChange:false,
         progress:{},
         year_month_info:{},
+        rootArr:[]
       }
     },
     components:{
@@ -108,14 +109,17 @@
           this.year_month_info=res.year_month_info;
         })
       },
-      changeCont(tit,name){
-         // if (name=='项目进度'){
-            /*queryProject({"id": this.id}).then(res => {
-              this.progress=JSON.stringify(res.progress);
-              this.year_month_info=JSON.stringify(res.year_month_info);
-            })*/
-          //}
-      },
+     /* changeCont(tit,name){
+        if (name=='项目进度'){
+          if(this.rootArr.indexOf('progress_show')!=-1){
+
+          }else{
+            this.progress=[];
+            this.year_month_info=[];
+            this.$toast('没有查看权限，请联系管理员')
+          }
+        }
+      },*/
       toCompany(id){
         this.$router.push({
           path:'/CompanyView',
@@ -126,6 +130,7 @@
       }
     },
     mounted(){
+
       this.id = this.$route.query.id;
       this.init();
     }

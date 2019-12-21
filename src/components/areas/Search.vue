@@ -56,6 +56,7 @@
         this.show = true
       },
       bindSearch(){
+
         this.$emit('searchObj',this.para);
       },
       init(){

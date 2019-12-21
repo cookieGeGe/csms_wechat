@@ -205,10 +205,36 @@
       },
 
       searchObj(params){
-        this.$router.push({
-          name:this.searchType,
-          params,
-        });
+        if(this.searchType=='Project'){
+          if(this.rootArr.indexOf('project_show')!=-1){
+            this.$router.push({
+              name:this.searchType,
+              params,
+            });
+          }else{
+            this.$toast('没有查看权限，请联系管理员');
+          }
+        }
+        if(this.searchType=='Company'){
+          if(this.rootArr.indexOf('company_show')!=-1){
+            this.$router.push({
+              name:this.searchType,
+              params,
+            });
+          }else{
+            this.$toast('没有查看权限，请联系管理员');
+          }
+        }
+        if(this.searchType=='Labor'){
+          if(this.rootArr.indexOf('labor_show')!=-1){
+            this.$router.push({
+              name:this.searchType,
+              params,
+            });
+          }else{
+            this.$toast('没有查看权限，请联系管理员');
+          }
+        }
       },
 
       onLoad() {
@@ -266,8 +292,6 @@
       myroute(name){
         var type=this.rootArr.indexOf(this.rootObj[name]);
         if (type!=-1){
-            console.log(name);
-            console.log(this.rootObj[name]);
           this.$router.push({
             name,
           });
