@@ -22,10 +22,6 @@
         </van-cell-group>
       </div>
     </div>
-
-
-
-
   </div>
 </template>
 
@@ -63,8 +59,11 @@
              localStorage.setItem('LoginName',this.LoginName);
              localStorage.setItem('admintype',res.admintype);
              localStorage.setItem('token',res.token);
+             localStorage.setItem('permission',res.permission);
 
-             this.$router.push({'path':'/Main'})
+             this.$router.push({
+                 path: '/Main',
+               })
           })
         },
 

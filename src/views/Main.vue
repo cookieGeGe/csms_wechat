@@ -36,19 +36,19 @@
                   inactive-color="#3c3c3c"
                   style="background: transparent;height: 6rem;font-size: 1.6rem"
       >
-        <van-tabbar-item name="company" to="/Company">
+        <van-tabbar-item   @click="myroute('Company')">
           <span>企业查询</span>
           <img slot="icon" src="../assets/index/index_icon1.png">
         </van-tabbar-item>
-        <van-tabbar-item name="project" to="/Project">
+        <van-tabbar-item  @click="myroute('Project')">
           <span>项目查询</span>
           <img slot="icon" src="../assets/index/index_icon2.png">
         </van-tabbar-item>
-        <van-tabbar-item name="labor" to="/Labor">
+        <van-tabbar-item  @click="myroute('Labor')">
           <span>劳工查询</span>
           <img slot="icon" src="../assets/index/index_icon3.png">
         </van-tabbar-item>
-        <van-tabbar-item name="attend" to="/Attend">
+        <van-tabbar-item  @click="myroute('Attend')">
           <span>考勤查询</span>
           <img slot="icon" src="../assets/index/index_icon4.png">
         </van-tabbar-item>
@@ -58,19 +58,19 @@
                   inactive-color="#3c3c3c"
                   style="background: transparent;height: 6rem"
       >
-        <van-tabbar-item name="salary" to="/salary">
+        <van-tabbar-item @click="myroute('wage')">
           <span>工资查询</span>
           <img slot="icon" src="../assets/index/index_icon5.png">
         </van-tabbar-item>
-        <van-tabbar-item name="bank" to="/Bank">
+        <van-tabbar-item   @click="myroute('Bank')">
           <span>银行查询</span>
           <img slot="icon" src="../assets/index/index_icon6.png">
         </van-tabbar-item>
-        <van-tabbar-item name="guarantee" to="/Guarantee">
+        <van-tabbar-item  @click="myroute('Guarantee')">
           <span>保函查询</span>
           <img slot="icon" src="../assets/index/index_icon7.png">
         </van-tabbar-item>
-        <van-tabbar-item name="help" to="/Help">
+        <van-tabbar-item  @click="myroute('Help')">
           <span>帮助中心</span>
           <img slot="icon" src="../assets/index/index_icon8.png">
         </van-tabbar-item>
@@ -140,7 +140,7 @@
 
 <script>
   import {indexCount, queryProject, queryCompany, queryLabor}  from '@/api/api';
-  import {getAdmintype}  from '@/utils/type'
+  import {getAdmintype,rootObj}  from '@/utils/type'
 
   import Search from '@/components/areas/Search'
   import TatisticsItem from '@/components/tatistics/TatisticsItem'
@@ -160,6 +160,7 @@
         statisticsData: '',
 
         activeName: 'company',
+        rootObj,
         tabsing:{
             'project':{
               result:[],
@@ -180,6 +181,7 @@
               finished:false,
             }
         },
+        rootArr:[]
       }
     },
     components: {
@@ -203,10 +205,36 @@
       },
 
       searchObj(params){
-        this.$router.push({
-          name:this.searchType,
-          params,
-        });
+        if(this.searchType=='Project'){
+          if(this.rootArr.indexOf('project_show')!=-1){
+            this.$router.push({
+              name:this.searchType,
+              params,
+            });
+          }else{
+            this.$toast('没有查看权限，请联系管理员');
+          }
+        }
+        if(this.searchType=='Company'){
+          if(this.rootArr.indexOf('company_show')!=-1){
+            this.$router.push({
+              name:this.searchType,
+              params,
+            });
+          }else{
+            this.$toast('没有查看权限，请联系管理员');
+          }
+        }
+        if(this.searchType=='Labor'){
+          if(this.rootArr.indexOf('labor_show')!=-1){
+            this.$router.push({
+              name:this.searchType,
+              params,
+            });
+          }else{
+            this.$toast('没有查看权限，请联系管理员');
+          }
+        }
       },
 
       onLoad() {
@@ -214,40 +242,67 @@
           var oneName=this.activeName;
           var oneTab=this.tabsing[oneName];
           var para = {status: false,page:oneTab.page};
-
           if(oneName=='project'){
-            queryProject(para).then(res => {
-              if(res[oneName].length<10) {
-                oneTab.finished = true;
-              }
-              oneTab.loading=false;
-              oneTab.result=res[oneName];
-              oneTab.page++;
-            });
-          }else if(oneName=='company'){
-            queryCompany(para).then(res => {
-              if(res[oneName].length<10) {
-                oneTab.finished = true;
-              }
+            if(this.rootArr.indexOf('project_show')!=-1){
+              queryProject(para).then(res => {
+                if(res[oneName].length<10) {
+                  oneTab.finished = true;
+                }
                 oneTab.loading=false;
                 oneTab.result=res[oneName];
                 oneTab.page++;
-            });
-          }else if(oneName=='labor'){
-            queryLabor(para).then(res => {
-              if(res[oneName].length<10) {
-                oneTab.finished = true;
-              }
-                oneTab.loading=false;
-                oneTab.result=res[oneName];
-                oneTab.page++;
-            });
-          }
+              });
+            }else{
+              oneTab.loading=true;
+              this.$toast('没有查看权限，请联系管理员');
+            }
 
+          }else if(oneName=='company'){
+            if(this.rootArr.indexOf('company_show')!=-1){
+              queryCompany(para).then(res => {
+                if(res[oneName].length<10) {
+                  oneTab.finished = true;
+                }
+                oneTab.loading=false;
+                oneTab.result=res[oneName];
+                oneTab.page++;
+              });
+            }else{
+              oneTab.loading=true;
+              this.$toast('没有查看权限，请联系管理员');
+            }
+
+          }else if(oneName=='labor'){
+            if(this.rootArr.indexOf('labor_show')!=-1){
+              queryLabor(para).then(res => {
+                if(res[oneName].length<10) {
+                  oneTab.finished = true;
+                }
+                oneTab.loading=false;
+                oneTab.result=res[oneName];
+                oneTab.page++;
+              });
+            }else{
+              oneTab.loading=true;
+              this.$toast('没有查看权限，请联系管理员');
+            }
+          }
         }, 500);
-      }
+      },
+      myroute(name){
+        var type=this.rootArr.indexOf(this.rootObj[name]);
+        if (type!=-1){
+          this.$router.push({
+            name,
+          });
+        }else{
+            this.$toast('没有查看权限，请联系管理员')
+        }
+      },
     },
     mounted() {
+      var arrs=localStorage.getItem('permission');
+      this.rootArr=arrs.split(',');
       this.init();
       this.onLoad();
 
@@ -291,6 +346,9 @@
   /deep/
   .statistics .van-tabs__wrap {
     margin-bottom: .5rem;
+  }
+  .van-tabbar-item--active{
+    color:#7d7e80;
   }
 </style>
 
