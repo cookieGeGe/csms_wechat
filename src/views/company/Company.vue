@@ -1,13 +1,14 @@
 <template>
   <div class="company">
+    <headerBar fatherName="首页" currentNmae="企业查询" ></headerBar>
     <Search @searchObj="searchObj"></Search>
     <van-row type="flex" align="center" justify="space-between" style="margin: 10px;margin-top: 0;">
       <van-col span="">
         <van-dropdown-menu active-color="#8eaccc" class="dropdown">
           <van-dropdown-item v-model="searchType.type" :options="companyTypeArr" @change="typeChange"/>
         </van-dropdown-menu>
-      <!--</van-col>-->
-      <!--<van-col span="">-->
+        <!--</van-col>-->
+        <!--<van-col span="">-->
         <van-dropdown-menu active-color="#8eaccc" class="dropdown">
           <van-dropdown-item v-model="searchType.status" :options="companyBadArr" @change="statusChange"/>
         </van-dropdown-menu>
@@ -40,16 +41,17 @@
 </template>
 
 <script>
-  import {companyTypeArr, companyBadArr}  from '@/utils/type'
-  import {queryCompany}  from '@/api/api'
-  import Search  from '@/components/areas/Search'
-  import SearchResult  from '@/components/areas/SearchResult'
-  import CompnayListItem  from '@/components/company/CompnayListItem'
+  import {companyTypeArr, companyBadArr} from '@/utils/type'
+  import {queryCompany} from '@/api/api'
+  import Search from '@/components/areas/Search'
+  import SearchResult from '@/components/areas/SearchResult'
+  import headerBar from '@/components/areas/headerBar'
+  import CompnayListItem from '@/components/company/CompnayListItem'
 
 
   export default {
     name: 'Company',
-    data () {
+    data() {
       return {
         show: false,
         companyTypeArr,
@@ -72,24 +74,25 @@
     },
     components: {
       Search,
+      headerBar,
       SearchResult,
       CompnayListItem
     },
     methods: {
-      typeChange(value){
+      typeChange(value) {
         this.searchType.type = value;
         this.searching()
       },
-      statusChange(value){
+      statusChange(value) {
         this.searchType.status = value;
         this.searching()
       },
-      confirms(){
+      confirms() {
         this.searchType.time = this.currentDate;
         this.show = false;
         this.searching()
       },
-      reload(){
+      reload() {
         this.finished = false;
         this.loading = true;
         queryCompany(this.searchType).then(res => {
@@ -101,30 +104,32 @@
           this.loading = false;  //是否结束加载状态
           this.result = ret;
           this.searchType.page++;
-          this.totals=res.totals;
+          this.totals = res.totals;
         });
       },
-      searchObj(params){
+      searchObj(params) {
         this.searchType = Object.assign(this.searchType, params);
         this.searching();
       },
-      onLoad(){
+      onLoad() {
         this.reload();
       },
-      searching(){  //重置搜索状态
-        this.totals={total:0,
-          normal:0,
-          abnormal:0,
-          currentrate:0,};
+      searching() {  //重置搜索状态
+        this.totals = {
+          total: 0,
+          normal: 0,
+          abnormal: 0,
+          currentrate: 0,
+        };
         this.isReload = true;
         this.searchType.page = 1;
         this.reload();
       }
     },
-    created(){
+    created() {
       localStorage.setItem('searchParams', JSON.stringify(this.$route.params));
     },
-    mounted(){
+    mounted() {
       this.searchObj(this.$route.params)
     }
   }
@@ -153,8 +158,6 @@
   /deep/ .van-dropdown-menu__title div {
     margin-top: 1px;
   }
-
-
 
   .company /deep/ .van-dropdown-item__option {
     line-height: 1rem;
