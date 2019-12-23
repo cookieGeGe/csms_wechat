@@ -1,5 +1,6 @@
 <template>
   <div class="view">
+    <headerBar :fatherName="sources" :currentNmae="item.name"></headerBar>
     <div class="title">
       <div class="cont">
           <LaborListItem  :result="this.item" ></LaborListItem>
@@ -114,6 +115,7 @@
   import {laborEdu}  from '@/utils/type'
   import LaborListItem  from '@/components/labor/LaborListItem'
   import GroupImg  from '@/components/GroupImg/GroupImg'
+  import headerBar  from '@/components/areas/headerBar'
   import Vue from 'vue';
   import { ImagePreview } from 'vant';
   Vue.use(ImagePreview);
@@ -124,6 +126,7 @@
       return {
         laborEdu,
         id: 0,
+        sources: 0,
         item: {
 
         },
@@ -133,7 +136,8 @@
     },
     components:{
       GroupImg,
-      LaborListItem
+      LaborListItem,
+      headerBar
     },
     methods: {
       init(){
@@ -159,6 +163,7 @@
     },
     mounted(){
       this.id = this.$route.query.id;
+      this.sources = this.$route.query.sources;
       this.init();
     }
   }

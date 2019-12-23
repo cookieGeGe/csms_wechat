@@ -97,7 +97,7 @@
       reload() {
         queryGuarantee(this.searchType).then(res => {
           var ret = res.guarantee;
-          console.log(res);
+        //  console.log(res);
           this.isReload = false; //是否重新赋值
           this.result = ret;
           this.groupList = res.pic_groups;

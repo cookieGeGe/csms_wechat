@@ -93,7 +93,7 @@
           date: this.params.date
         }
         queryAttendProCom(params).then(res => {
-          console.log(res)
+        //  console.log(res)
           this.total = res.total;
           this.normal = res.normal;
           this.abnormal = res.abnormal;

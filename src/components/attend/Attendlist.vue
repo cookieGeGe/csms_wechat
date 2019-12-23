@@ -39,7 +39,7 @@
     props: ['result', 'isReload', 'type'],
     methods: {
       toView(id, date, name) {
-        console.log(id,date,name,this.type)
+       // console.log(id,date,name,this.type)
         this.$router.push({
           path: '/AttendInfo',
           query: {

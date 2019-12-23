@@ -82,7 +82,7 @@
     },
     methods: {
       clickDay(data) {
-        console.log(data); //选中某天
+        //console.log(data); //选中某天
       },
       changeDate(data) {
         // console.log(data); //左右点击切换月份
@@ -106,7 +106,7 @@
               this.info.deduction = 0
               this.info.total = 0
             } else {
-              console.log(res);
+             // console.log(res);
               this.total = ret[0].total;
               this.info = ret[0];
             }
@@ -124,7 +124,7 @@
       reload() {
         querySalary(this.searchType).then((res) => {
           var ret = res.data;
-          console.log(res);
+         // console.log(res);
           this.isReload = false; //是否重新赋值
           this.result = ret;
           this.info = ret[0];

@@ -53,12 +53,13 @@
         this.$router.push({
           path:'/LaborView',
           query:{
-            id
+            id,
+            sources:this.source||'劳工查询'
           },
         });
       }
     },
-    props: ['result', 'isReload'],
+    props: ['result', 'isReload','source'],
     watch: {                        //监听value的变化，进行相应的操作即可
       result: function (a, b) {       //a是value的新值，b是旧值
         if (a != b) {

@@ -110,7 +110,7 @@
             finished-text="没有更多了"
             @load="onLoad"
           >
-            <ProjectListItem :result="tabsing.project.result"></ProjectListItem>
+            <ProjectListItem :result="tabsing.project.result" source="首页"></ProjectListItem>
           </van-list>
         </van-tab>
         <van-tab title="企业风险" name="company">
@@ -120,7 +120,7 @@
             finished-text="没有更多了"
             @load="onLoad"
           >
-            <CompnayListItem :result="tabsing.company.result"></CompnayListItem>
+            <CompnayListItem :result="tabsing.company.result" source="首页"></CompnayListItem>
           </van-list>
         </van-tab>
         <van-tab title="劳工风险" name="labor">
@@ -130,7 +130,7 @@
             finished-text="没有更多了"
             @load="onLoad"
           >
-          <LaborListItem :result="tabsing.labor.result"></LaborListItem>
+          <LaborListItem :result="tabsing.labor.result" source="首页"></LaborListItem>
           </van-list>
         </van-tab>
       </van-tabs>
@@ -294,7 +294,7 @@
       },
       myroute(name){
         var type=this.rootArr.indexOf(this.rootObj[name]);
-        console.log(this.rootArr)
+        //console.log(this.rootArr)
         if (type!=-1){
           this.$router.push({
             name,

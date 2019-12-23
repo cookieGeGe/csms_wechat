@@ -82,12 +82,12 @@
       reload() {
         queryBank(this.searchType).then((res) => {
           var ret = res.project;
-          console.log(res);
+          //console.log(res);
           this.isReload = false; //是否重新赋值
           this.result = [ret,];
           this.yearData = res.allmonth;
           this.month_bank = res.bankinfo;
-          console.log(this.month_bank)
+          //console.log(this.month_bank)
           // if (this.month_bank.receipt == '') {
           //   this.month_bank.rectime = ''
           // }
@@ -108,7 +108,7 @@
       openers(key, event) {
         var el = event.currentTarget;
         var monthCont = el.nextElementSibling;
-        console.log(monthCont);
+       // console.log(monthCont);
         if (monthCont.style.display == 'none') {
           monthCont.style.display = 'block'
         } else {

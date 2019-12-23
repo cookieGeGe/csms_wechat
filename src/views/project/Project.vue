@@ -1,5 +1,6 @@
 <template>
   <div class="company">
+    <headerBar fatherName="首页" currentNmae="项目查询"></headerBar>
     <Search @searchObj="searchObj"></Search>
     <van-row type="flex" align="center" justify="space-between" style="margin: 10px;margin-top: 0;">
       <van-col span="">
@@ -43,6 +44,7 @@
   import {projectTypeArr, projectBadArr}  from '@/utils/type'
   import {queryProject}  from '@/api/api'
   import Search  from '@/components/areas/Search'
+  import headerBar  from '@/components/areas/headerBar'
   import SearchResult  from '@/components/areas/SearchResult'
   import ProjectListItem  from '@/components/project/ProjectListItem'
 
@@ -73,7 +75,8 @@
     components: {
       Search,
       SearchResult,
-      ProjectListItem
+      ProjectListItem,
+      headerBar
     },
     methods: {
       typeChange(value){

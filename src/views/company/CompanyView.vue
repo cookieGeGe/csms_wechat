@@ -1,5 +1,6 @@
 <template>
   <div class="view">
+    <headerBar :fatherName="sources" currentNmae="企业详情"></headerBar>
     <div class="title">
       <div class="cont">
         <van-row class="tit" type="flex" align="center" justify="space-between">
@@ -47,7 +48,7 @@
           finished-text="没有更多了"
           :immediate-check="false"
         >
-          <ProjectListItem  :result="this.result"></ProjectListItem>
+          <ProjectListItem  :result="this.result" source="企业详情"></ProjectListItem>
         </van-list>
       </van-tab>
       <van-tab title="备注信息" class="description">
@@ -75,6 +76,7 @@
   import {companyBad, companyType, contact}  from '@/utils/type'
   import GroupImg  from '@/components/GroupImg/GroupImg'
   import ProjectListItem  from '@/components/project/ProjectListItem'
+  import headerBar  from '@/components/areas/headerBar'
   import Vue from 'vue';
   import { ImagePreview } from 'vant';
   Vue.use(ImagePreview);
@@ -87,6 +89,7 @@
         companyType,
         contact,
         id: 0,
+        sources: '',
         item: {
             phone:[]
         },
@@ -105,7 +108,8 @@
     },
     components:{
       GroupImg,
-      ProjectListItem
+      ProjectListItem,
+      headerBar
     },
     methods: {
       init(){
@@ -141,6 +145,7 @@
     },
     mounted(){
       this.id = this.$route.query.id;
+      this.sources = this.$route.query.sources;
       this.init();
     }
   }

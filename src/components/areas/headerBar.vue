@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <van-row class="header-bar" type="flex" align="left">
-      <span @click="goHistory()" style="color: #8eaccc !important;display: flex;">
-        <van-icon name="arrow-left" color="#8eaccc" size="2rem"/>{{fatherName}}
-      </span>
-      <span>{{currentNmae}}</span>
+    <van-row class="header-bar" >
+      <van-col @click="goHistory()" >
+        <span style="vertical-align: middle"><van-icon name="arrow-left" class="back" size="1.6rem"/></span>
+        <span>{{fatherName}}</span>
+      </van-col>
+      <van-col class="line"></van-col>
+      <van-col class="header-new">{{currentNmae}}</van-col>
     </van-row>
-  </div>
 </template>
 
 <script>
@@ -25,18 +25,16 @@
 </script>
 
 <style scoped>
-  .header-bar {
-    font-size: 1.5rem !important;
-  }
   .header-bar span {
-    padding-right: 1rem;
-    text-align: center;
-    color: #3c3c3c;
+    color: #8eaccc;
   }
-
-  .header-bar > span:last-child {
-    border-left: 2px solid #3c3c3c;
-    padding-left: 1rem;
+  .header-bar .line {
+    height:1.1rem;
+    width: 2px;
+    background: #888;
+    margin:.4rem .5rem 0 .5rem;
   }
-
+  .header-bar .header-new{
+    color: #888;
+  }
 </style>

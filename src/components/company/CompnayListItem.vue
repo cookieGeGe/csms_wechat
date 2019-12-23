@@ -31,13 +31,14 @@
         results: [],
       }
     },
-    props: ['result', 'isReload'],
+    props: ['result', 'isReload','source'],
     methods:{
         toView(id){
           this.$router.push({
             path:'/CompanyView',
             query:{
-                id
+                id,
+                sources:this.source||'企业查询'
             },
           });
         }
@@ -52,7 +53,7 @@
         if (a) {
           this.results = []
         }
-      }
+      },
     }
   }
 </script>
