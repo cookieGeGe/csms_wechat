@@ -1,5 +1,6 @@
 <template>
   <div class="company">
+    <headerBar fatherName="首页" currentNmae="保函查询"></headerBar>
     <Search @searchObj="searchObj"></Search>
     <van-row type="flex" align="center" justify="space-between" style="margin: 10px;margin-top: 0;">
       <van-col span="">
@@ -43,6 +44,7 @@
   import {guaranteeTypeArr} from '@/utils/type'
   import {queryGuarantee} from '@/api/api'
   import Search from '@/components/areas/Search'
+  import headerBar from '@/components/areas/headerBar';
   import guaranteeItem from '@/components/guarantee/guarateeItem'
 
 
@@ -69,6 +71,7 @@
     },
     components: {
       Search,
+      headerBar,
       guaranteeItem
     },
     methods: {

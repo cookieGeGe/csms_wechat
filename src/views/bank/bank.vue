@@ -1,5 +1,6 @@
 <template>
   <div class="company">
+    <headerBar fatherName="首页" currentNmae="银行查询"></headerBar>
     <Search @searchObj="searchObj"></Search>
     <van-row type="flex" align="center" justify="space-between" style="margin: 10px;margin-top: 0;">
       <van-col span="">
@@ -42,6 +43,7 @@
 <script>
   import {queryBank, queryBankAll} from '@/api/api';
   import Search from '@/components/areas/Search';
+  import headerBar from '@/components/areas/headerBar';
   import bankItem from '@/components/bank/bankItem';
 
 
@@ -68,6 +70,7 @@
     },
     components: {
       Search,
+      headerBar,
       bankItem
     },
     methods: {

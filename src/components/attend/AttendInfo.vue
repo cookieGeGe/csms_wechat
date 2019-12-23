@@ -1,5 +1,6 @@
 <template>
-  <div style="padding-top: 1rem;">
+  <div style="">
+    <headerBar fatherName="考勤查询" currentNmae="考勤详情"></headerBar>
     <van-row class="searchreuslt" type="flex" align="center">
       <van-col span="8" style="">
         <div class="tit">{{name}}</div>
@@ -61,6 +62,7 @@
 </template>
 
 <script>
+  import headerBar from '@/components/areas/headerBar';
   import {laborJob, laborSex} from '@/utils/type';
   import {queryAttendProCom} from '@/api/api';
 
@@ -79,6 +81,9 @@
         date: '',
         params: {}
       }
+    },
+    components: {
+      headerBar,
     },
     methods: {
       reload() {

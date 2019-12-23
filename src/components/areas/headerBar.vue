@@ -2,7 +2,7 @@
   <div>
     <van-row class="header-bar" type="flex" align="left">
       <span @click="goHistory()" style="color: #8eaccc !important;display: flex;">
-        <van-icon name="arrow-left" color="#8eaccc" size="3rem"/>{{fatherName}}
+        <van-icon name="arrow-left" color="#8eaccc" size="2rem"/>{{fatherName}}
       </span>
       <span>{{currentNmae}}</span>
     </van-row>
@@ -25,6 +25,9 @@
 </script>
 
 <style scoped>
+  .header-bar {
+    font-size: 1.5rem !important;
+  }
   .header-bar span {
     padding-right: 1rem;
     text-align: center;

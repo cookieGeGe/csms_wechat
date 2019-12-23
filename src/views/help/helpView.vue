@@ -1,5 +1,6 @@
 <template>
   <div class="van-content">
+    <headerBar fatherName="帮助中心" currentNmae="问题详情"></headerBar>
     <div class="card question">
       <div>
         输入要查询的问题：
@@ -43,6 +44,7 @@
 
 <script>
   import {queryQuestion} from '@/api/api';
+  import headerBar from '@/components/areas/headerBar';
   import {Toast} from 'vant'
 
   export default {
@@ -65,6 +67,9 @@
         total: 0,
         result: []
       }
+    },
+    components: {
+      headerBar,
     },
     methods: {
       query() {
@@ -106,10 +111,18 @@
 </script>
 
 <style scoped>
+  .van-content {
+    padding: 0 0;
+  }
   .question-answer {
     line-height: 3rem;
     font-size: 2.5rem;
     color: #a8a9aa;
+  }
+
+  .card {
+    margin-right: 5px;
+    margin-left: 5px;
   }
 
   /deep/ .answer img {

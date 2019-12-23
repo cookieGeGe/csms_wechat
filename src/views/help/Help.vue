@@ -1,5 +1,6 @@
 <template>
   <div class="van-content">
+    <headerBar fatherName="首页" currentNmae="帮助中心"></headerBar>
     <div class="card question">
       <div>
         输入要查询的问题：
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+  import headerBar from '@/components/areas/headerBar';
   import {queryQuestion} from '@/api/api';
 
   export default {
@@ -53,6 +55,9 @@
           name: ''
         }
       }
+    },
+    components: {
+      headerBar,
     },
     methods: {
       goto(id) {
@@ -79,6 +84,15 @@
 </script>
 
 <style scoped>
+  .van-content {
+    padding: 0 0;
+  }
+
+  .card {
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
   /deep/ .van-search {
     background: none !important;
     padding-left: 0;

@@ -1,5 +1,6 @@
 <template>
-  <div class="van-content">
+  <div class="">
+    <headerBar fatherName="工资查询" currentNmae="工资详情"></headerBar>
     <Calendar ref="Calendar" v-on:choseDay="clickDay"
               v-on:changeMonth="changeDate"></Calendar>
     <div class="card">
@@ -56,6 +57,7 @@
 <script>
   import salaryItem from '@/components/wage/wageItem';
   import Calendar from 'vue-calendar-component';
+  import headerBar from '@/components/areas/headerBar';
   import {querySalary, querySalaryNext} from '@/api/api';
 
   export default {
@@ -75,6 +77,7 @@
     },
     components: {
       salaryItem,
+      headerBar,
       Calendar
     },
     methods: {
@@ -155,6 +158,8 @@
 
   .card {
     padding: 0.5rem 0.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
     font-size: 1.1rem !important;
   }
 

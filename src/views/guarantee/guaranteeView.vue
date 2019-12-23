@@ -1,5 +1,6 @@
 <template>
-  <div class="van-content">
+  <div class="">
+    <headerBar fatherName="保函查询" currentNmae="保函详情"></headerBar>
     <div class="card">
       <guaranteeItem :isReload="isReload" :result="this.result"></guaranteeItem>
     </div>
@@ -67,6 +68,7 @@
 </template>
 
 <script>
+  import headerBar from '@/components/areas/headerBar';
   import guaranteeItem from '@/components/guarantee/guarateeItem';
   import {queryGuarantee} from '@/api/api';
   import GroupImg from '@/components/GroupImg/GroupImg'
@@ -88,6 +90,7 @@
     },
     components: {
       guaranteeItem,
+      headerBar,
       GroupImg
     },
     methods: {
@@ -117,6 +120,8 @@
 <style scoped>
   .card {
     padding: 0.5rem 0.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
     font-size: 1.2rem !important;
   }
 

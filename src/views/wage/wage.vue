@@ -1,5 +1,6 @@
 <template>
   <div class="company">
+    <headerBar fatherName="首页" currentNmae="工资查询"></headerBar>
     <van-tabs background="transparent"
               color="#fff"
               title-inactive-color="#fff"
@@ -48,6 +49,7 @@
 <script>
   import {querySalary} from '@/api/api';
   import Search from '@/components/areas/Search';
+  import headerBar from '@/components/areas/headerBar';
   import wageItem from '@/components/wage/wageItem';
 
 
@@ -75,6 +77,7 @@
     },
     components: {
       Search,
+      headerBar,
       wageItem
     },
     methods: {

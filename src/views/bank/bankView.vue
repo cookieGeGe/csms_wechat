@@ -1,5 +1,6 @@
 <template>
-  <div class="van-content">
+  <div class="">
+    <headerBar fatherName="银行查询" currentNmae="银行详情"></headerBar>
     <div class="card">
       <bankItem :isReload="isReload" :result="result"></bankItem>
     </div>
@@ -18,9 +19,15 @@
         </van-col>
         <van-col span="20" class="bankinfo">
           <div class="title">{{month_bank.year}}年 {{month_bank.month}}月 银行账户信息</div>
-          <div v-if="month_bank.status==0" >支付状态；<van-tag color="#8ec5cc">全额到</van-tag></div>
-          <div v-else-if="month_bank.status==1">支付状态；<van-tag color="#d9aa60">部分到</van-tag></div>
-          <div v-else>支付状态；<van-tag color="#d96c60">未到账</van-tag></div>
+          <div v-if="month_bank.status==0">支付状态；
+            <van-tag color="#8ec5cc">全额到</van-tag>
+          </div>
+          <div v-else-if="month_bank.status==1">支付状态；
+            <van-tag color="#d9aa60">部分到</van-tag>
+          </div>
+          <div v-else>支付状态；
+            <van-tag color="#d96c60">未到账</van-tag>
+          </div>
           <div>每月余额；{{month_bank.rpay - month_bank.actualpay||'0'}}</div>
           <div>开卡数：{{month_bank.workers || '0'}}</div>
           <div>当月账户收到金额：{{month_bank.rpay||'0'}}</div>
@@ -49,6 +56,7 @@
 
 <script>
   import bankItem from '@/components/bank/bankItem';
+  import headerBar from '@/components/areas/headerBar';
   import {queryBank, queryBankInfo} from '@/api/api';
 
   export default {
@@ -67,7 +75,8 @@
       }
     },
     components: {
-      bankItem
+      bankItem,
+      headerBar
     },
     methods: {
       reload() {
@@ -126,6 +135,8 @@
 <style scoped>
   .card {
     padding: 0.5rem 0.5rem;
+    margin-right: 5px;
+    margin-left: 5px;
     font-size: 1.1rem !important;
   }
 
@@ -139,6 +150,7 @@
     font-size: 1.3rem;
     font-weight: bold;
   }
+
   .bankinfo img {
     width: 85%;
     max-height: 18rem;

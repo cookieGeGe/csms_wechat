@@ -1,5 +1,6 @@
 <template>
   <div class="company">
+    <headerBar fatherName="首页" currentNmae="考勤查询"></headerBar>
     <van-tabs background="transparent"
               color="#fff"
               title-inactive-color="#fff"
@@ -103,6 +104,7 @@
 <script>
   import {queryAttend} from '@/api/api';
   import Search from '@/components/areas/Search';
+  import headerBar from '@/components/areas/headerBar';
   import AttendItem from '@/components/attend/AttendItem';
   import Attendlist from '@/components/attend/Attendlist';
 
@@ -139,12 +141,13 @@
         com_finished: false,
         com_result: [],
         com_result: 0,
-        com_total:0,
+        com_total: 0,
       }
     },
     components: {
       Search,
       AttendItem,
+      headerBar,
       Attendlist
     },
     methods: {
@@ -299,12 +302,13 @@
     line-height: 2rem;
   }
 
-  /deep/ .van-tabs__content{
+  /deep/ .van-tabs__content {
     padding-top: 6.5rem;
- }
-  .myserach{
+  }
+
+  .myserach {
     position: absolute;
-    top: 4.5rem;
+    top: 8rem;
     left: 0;
     width: 100%;
   }
