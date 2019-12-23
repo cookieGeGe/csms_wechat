@@ -29,7 +29,7 @@
     color: #8eaccc;
   }
   .header-bar .line {
-    height:1.1rem;
+    height:1.5rem;
     width: 2px;
     background: #888;
     margin:.4rem .5rem 0 .5rem;

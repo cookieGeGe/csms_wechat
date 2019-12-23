@@ -138,10 +138,20 @@
 </script>
 
 <style scoped>
+  .van-content {
+    margin: 0 0;
+  }
+
   .card {
     padding: 0.5rem 0.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
     font-size: 1.1rem !important;
   }
+   .attend {
+     margin-left: 5px;
+     margin-right: 5px;
+   }
 
   .attend /deep/ .van-row {
     border-bottom: 1px solid #ececec;
