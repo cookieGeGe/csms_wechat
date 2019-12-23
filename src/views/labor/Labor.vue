@@ -1,5 +1,6 @@
 <template>
   <div class="company">
+    <headerBar fatherName="首页" currentNmae="劳工查询"></headerBar>
     <Search @searchObj="searchObj"></Search>
     <van-row type="flex" align="center" justify="space-between" style="margin: 10px;margin-top: 0;">
       <van-col span="">
@@ -42,6 +43,7 @@
   import {laborSexArr, laborJobArr,laborAgeArr,laborEduArr}  from '@/utils/type'
   import {queryLabor}  from '@/api/api'
   import Search  from '@/components/areas/Search'
+  import headerBar  from '@/components/areas/headerBar'
   import SearchResult  from '@/components/areas/SearchResult'
   import LaborListItem  from '@/components/labor/LaborListItem'
 
@@ -73,7 +75,8 @@
     components: {
       Search,
       SearchResult,
-      LaborListItem
+      LaborListItem,
+      headerBar
     },
     methods: {
       sexChange(value){

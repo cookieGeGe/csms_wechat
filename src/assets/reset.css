@@ -1,121 +1,16 @@
-/*
-html5doctor.com Reset Stylesheet
-v1.4.1
-2010-03-01
-Author: Richard Clark - http://richclarkdesign.com
-*/
-/*html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code,
-del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var,
-b, i,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video {
-  margin:0;
-  padding:0;
-  border:0;
-  outline:0;
-  font-size:100%;
-  vertical-align:baseline;
-  background:transparent;
-  box-sizing:border-box;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 
-}*/
 html{
   font-size: 10px;
   color: #3c3c3c;
-}/*
-body {
-  line-height:1;
 }
-
-:focus {
-  outline: 1;
-}
-
-article,aside,canvas,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section,summary {
-  display:block;
-}
-
-ul {
-  list-style:none;
-}
-
-blockquote, q {
-  quotes:none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content:'';
-  content:none;
-}
-
-a {
-  margin:0;
-  padding:0;
-  border:0;
-  font-size:100%;
-  vertical-align:baseline;
-  background:transparent;
-}
-
-ins {
-  background-color:#ff9;
-  color: #3c3c3c;
-  text-decoration:none;
-}
-
-mark {
-  background-color:#ff9;
-  color: #3c3c3c;
-  font-style:italic;
-  font-weight:bold;
-}
-
-del {
-  text-decoration: line-through;
-}
-
-abbr[title], dfn[title] {
-  border-bottom:1px dotted #000;
-  cursor:help;
-}
-
-table {
-  border-collapse:collapse;
-  border-spacing:0;
-}
-
-hr {
-  display:block;
-  height:1px;
-  border:0;
-  border-top:1px solid #cccccc;
-  margin:1em 0;
-  padding:0;
-}
-
-input, select {
-  vertical-align:middle;
-}
-*/
 /*   common   */
 .header-bar{
-  font-size: 2rem;
+  font-size: 1.6rem;
   background: #fff;
   text-align: left;
   color: #5e5e5e;
   padding: .5rem 1rem;
+  overflow: hidden;
 }
 .tit-big{
   font-size: 2.5rem;
@@ -164,7 +59,6 @@ template中最大的div
   position: relative;
   box-sizing: border-box;
   color: #323233;
-  font-size: 12px;
   opacity: 0.9;
   border-radius: 4px;
   line-height: 1.7rem;

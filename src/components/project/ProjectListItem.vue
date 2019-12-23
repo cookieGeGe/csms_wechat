@@ -54,13 +54,14 @@
         results:[]
       }
     },
-    props: ['result', 'isReload','daochu'],
+    props: ['result', 'isReload','daochu','source'],
     methods:{
       toView(id){
         this.$router.push({
           path:'/ProjectView',
           query:{
-            id
+            id,
+            sources:this.source||'项目查询'
           },
         });
       },

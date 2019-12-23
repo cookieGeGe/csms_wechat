@@ -1,6 +1,6 @@
 <template>
   <div class="company">
-    <headerBar fatherName="首页" currentNmae="企业查询" ></headerBar>
+    <headerBar fatherName="首页" currentNmae="企业查询"></headerBar>
     <Search @searchObj="searchObj"></Search>
     <van-row type="flex" align="center" justify="space-between" style="margin: 10px;margin-top: 0;">
       <van-col span="">

@@ -1,5 +1,6 @@
 <template>
   <div class="view">
+    <headerBar :fatherName="sources" currentNmae="项目详情"></headerBar>
     <div class="title">
         <ProjectListItem :daochu="true" :result="this.item" class="cont"></ProjectListItem>
 
@@ -57,6 +58,7 @@
 
   import {queryProject}  from '@/api/api'
   import GroupImg  from '@/components/GroupImg/GroupImg'
+  import headerBar  from '@/components/areas/headerBar'
   import ProjectListItem  from '@/components/project/ProjectListItem'
   import Progress  from '@/views/project/Progress'
   import Vue from 'vue';
@@ -68,6 +70,7 @@
     data () {
       return {
         id: 0,
+        sources:'',
         item: {
             phone:[]
         },
@@ -90,7 +93,8 @@
     components:{
       GroupImg,
       ProjectListItem,
-      Progress
+      Progress,
+      headerBar
     },
     methods: {
       init(){
@@ -116,7 +120,8 @@
         this.$router.push({
           path:'/CompanyView',
           query:{
-            id
+            id,
+            sources:'项目详情'
           },
         });
       }
@@ -124,6 +129,7 @@
     mounted(){
 
       this.id = this.$route.query.id;
+      this.sources = this.$route.query.sources;
       this.init();
     }
   }

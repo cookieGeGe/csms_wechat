@@ -64,9 +64,9 @@
         }
       },
       total:function (a, b) {
-        console.log(this.results, a)
+       // console.log(this.results, a)
         this.results[0].total = a
-        console.log(this.results)
+        //console.log(this.results)
       }
     }
   }
