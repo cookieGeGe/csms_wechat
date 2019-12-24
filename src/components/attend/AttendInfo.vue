@@ -11,8 +11,8 @@
         <div class="num">{{total}}</div>
       </van-col>
       <van-col span="7" style="text-align: left;padding-left: 1rem">
-        <div>未考勤 <span class="num" style="color:#8ec5cc">{{normal}}</span></div>
-        <div>已考勤 <span class="num" style="color:#d9aa60">{{abnormal}}</span></div>
+        <div>已考勤 <span class="num" style="color:#d9aa60">{{normal}}</span></div>
+        <div>未考勤 <span class="num" style="color:#8ec5cc">{{abnormal}}</span></div>
       </van-col>
       <van-col span="4" offset="1">
         <van-circle
@@ -93,7 +93,7 @@
           date: this.params.date
         }
         queryAttendProCom(params).then(res => {
-        //  console.log(res)
+          //  console.log(res)
           this.total = res.total;
           this.normal = res.normal;
           this.abnormal = res.abnormal;
@@ -119,7 +119,7 @@
 <style scoped>
   .card {
     font-size: 1.1rem;
-    padding: 1rem 1rem;
+    padding: 1rem 0rem;
   }
 
   .searchreuslt {

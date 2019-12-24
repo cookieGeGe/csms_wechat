@@ -37,7 +37,7 @@
         <van-col span="12">小计</van-col>
         <van-col span="12" class="float-right yellow-c">¥ {{info.subtotal||'0'}}</van-col>
         <van-col span="12">奖金</van-col>
-        <van-col span="12" class="float-right">¥ {{info.raward||'0'}}</van-col>
+        <van-col span="12" class="float-right">¥ {{info.reward||'0'}}</van-col>
         <van-col span="12">扣款</van-col>
         <van-col span="12" class="float-right">¥ {{info.deduction||'0'}}</van-col>
         <van-col span="12">实发工资</van-col>

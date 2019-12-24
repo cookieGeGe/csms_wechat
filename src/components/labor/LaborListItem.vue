@@ -25,7 +25,7 @@
             <van-tag color="#8ec5cc">{{item.age}} </van-tag>
             <van-tag v-if="item.isbadrecord>0" color="#d9aa60">{{laborIsbadrecord(item.isbadrecord)}} </van-tag>
           </div>
-          <div>{{item.pname}}-{{item.dname}}-{{item.cname}}</div>
+          <div>{{item.pname}}-{{item.cname}}-{{item.dname}}</div>
           <div class="van-ellipsis">项目名称:<span class="mianColor">{{item.projectname}}</span></div>
           <div class="van-ellipsis">所属企业:<span class="mianColor">{{item.companyname}}</span></div>
         </van-col>

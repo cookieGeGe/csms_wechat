@@ -18,7 +18,7 @@
         <van-col span="16">
           <div>项目区域：{{item.pname}}-{{item.cname}}-{{item.dname}}</div>
           <div>公司名称：{{item.companyid}}</div>
-          <div>收益人名称：{{item.bene}}</div>
+          <div>受益人名称：{{item.bene}}</div>
           <div>保函期限：{{item.signtime}} 至 {{item.expiretime}}</div>
         </van-col>
         <van-col span="8" align="center"  class="left-border">
