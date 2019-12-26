@@ -102,7 +102,7 @@
               this.info.basicwage = 0
               this.info.overtime = 0
               this.info.subtotal = 0
-              this.info.raward = 0
+              this.info.reward = 0
               this.info.deduction = 0
               this.info.total = 0
             } else {

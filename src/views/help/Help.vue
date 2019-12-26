@@ -1,6 +1,6 @@
 <template>
-  <div class="van-content">
-    <headerBar fatherName="首页" currentNmae="帮助中心"></headerBar>
+  <div class="" style="padding-top: 5px">
+    <headerBar v-show="showheader" fatherName="首页" currentNmae="帮助中心" style="margin-top: -5px;"></headerBar>
     <div class="card question">
       <div>
         输入要查询的问题：
@@ -48,6 +48,7 @@
     data() {
       return {
         total: 0,
+        showheader:false,
         value: '',
         result: [1, 2, 3, 4],
         params: {
@@ -78,6 +79,9 @@
       }
     },
     mounted() {
+      if (this.$route.query.help) {
+        this.showheader = true
+      }
       this.onSearch();
     }
   }

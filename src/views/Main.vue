@@ -1,5 +1,5 @@
 <template>
-  <div class="main" >
+  <div class="main">
     <!--标题-->
     <van-row type="flex" justify="space-between" class="header-box">
       <van-col span="14" class="header-tit">建筑工地管理系统</van-col>
@@ -26,7 +26,7 @@
       <van-tab title="企 业" name="Company"></van-tab>
       <van-tab title="劳 工" name="Labor"></van-tab>
     </van-tabs>
-    <Search   @searchObj="searchObj"></Search>
+    <Search @searchObj="searchObj"></Search>
 
     <!--菜单  -->
     <div class="menus-box">
@@ -36,19 +36,19 @@
                   inactive-color="#3c3c3c"
                   style="background: transparent;height: 6rem;font-size: 1.6rem"
       >
-        <van-tabbar-item   @click="myroute('Company')">
+        <van-tabbar-item @click="myroute('Company')">
           <span>企业查询</span>
           <img slot="icon" src="../assets/index/index_icon1.png">
         </van-tabbar-item>
-        <van-tabbar-item  @click="myroute('Project')">
+        <van-tabbar-item @click="myroute('Project')">
           <span>项目查询</span>
           <img slot="icon" src="../assets/index/index_icon2.png">
         </van-tabbar-item>
-        <van-tabbar-item  @click="myroute('Labor')">
+        <van-tabbar-item @click="myroute('Labor')">
           <span>劳工查询</span>
           <img slot="icon" src="../assets/index/index_icon3.png">
         </van-tabbar-item>
-        <van-tabbar-item  @click="myroute('Attend')">
+        <van-tabbar-item @click="myroute('Attend')">
           <span>考勤查询</span>
           <img slot="icon" src="../assets/index/index_icon4.png">
         </van-tabbar-item>
@@ -62,15 +62,15 @@
           <span>工资查询</span>
           <img slot="icon" src="../assets/index/index_icon5.png">
         </van-tabbar-item>
-        <van-tabbar-item   @click="myroute('bank')">
+        <van-tabbar-item @click="myroute('bank')">
           <span>银行查询</span>
           <img slot="icon" src="../assets/index/index_icon6.png">
         </van-tabbar-item>
-        <van-tabbar-item  @click="myroute('Guarantee')">
+        <van-tabbar-item @click="myroute('Guarantee')">
           <span>保函查询</span>
           <img slot="icon" src="../assets/index/index_icon7.png">
         </van-tabbar-item>
-        <van-tabbar-item  @click="myroute('Help')">
+        <van-tabbar-item @click="myroute('Help')">
           <span>帮助中心</span>
           <img slot="icon" src="../assets/index/index_icon8.png">
         </van-tabbar-item>
@@ -96,51 +96,51 @@
 
     <!--风险  -->
 
-     <van-tabs v-model="activeName"
-                color="#8eaccc"
-                title-inactive-color="#5e5e5e"
-                title-active-color="#5e5e5e"
-                class="risk"
-                @click="changeStatus"
-      >
-        <van-tab title="项目风险" name="project">
-          <van-list
-            v-model="tabsing.project.loading"
-            :finished="tabsing.project.finished"
-            finished-text="没有更多了"
-            @load="onLoad"
-          >
-            <ProjectListItem :result="tabsing.project.result" source="首页"></ProjectListItem>
-          </van-list>
-        </van-tab>
-        <van-tab title="企业风险" name="company">
-          <van-list
-            v-model="tabsing.company.loading"
-            :finished="tabsing.company.finished"
-            finished-text="没有更多了"
-            @load="onLoad"
-          >
-            <CompnayListItem :result="tabsing.company.result" source="首页"></CompnayListItem>
-          </van-list>
-        </van-tab>
-        <van-tab title="劳工风险" name="labor">
-          <van-list
-            v-model="tabsing.labor.loading"
-            :finished="tabsing.labor.finished"
-            finished-text="没有更多了"
-            @load="onLoad"
-          >
+    <van-tabs v-model="activeName"
+              color="#8eaccc"
+              title-inactive-color="#5e5e5e"
+              title-active-color="#5e5e5e"
+              class="risk"
+              @click="changeStatus"
+    >
+      <van-tab title="项目风险" name="project">
+        <van-list
+          v-model="tabsing.project.loading"
+          :finished="tabsing.project.finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+        >
+          <ProjectListItem :result="tabsing.project.result" source="首页"></ProjectListItem>
+        </van-list>
+      </van-tab>
+      <van-tab title="企业风险" name="company">
+        <van-list
+          v-model="tabsing.company.loading"
+          :finished="tabsing.company.finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+        >
+          <CompnayListItem :result="tabsing.company.result" source="首页"></CompnayListItem>
+        </van-list>
+      </van-tab>
+      <van-tab title="劳工风险" name="labor">
+        <van-list
+          v-model="tabsing.labor.loading"
+          :finished="tabsing.labor.finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+        >
           <LaborListItem :result="tabsing.labor.result" source="首页"></LaborListItem>
-          </van-list>
-        </van-tab>
-      </van-tabs>
+        </van-list>
+      </van-tab>
+    </van-tabs>
 
   </div>
 </template>
 
 <script>
-  import {indexCount, queryProject, queryCompany, queryLabor}  from '@/api/api';
-  import {getAdmintype,rootObj}  from '@/utils/type'
+  import {indexCount, queryProject, queryCompany, queryLabor} from '@/api/api';
+  import {getAdmintype, rootObj} from '@/utils/type'
 
   import Search from '@/components/areas/Search'
   import TatisticsItem from '@/components/tatistics/TatisticsItem'
@@ -151,7 +151,7 @@
 
   export default {
     name: 'Main',
-    data () {
+    data() {
       return {
         LoginName: localStorage.getItem('LoginName'),
         admintype: getAdmintype(localStorage.getItem('admintype')),
@@ -161,27 +161,27 @@
 
         activeName: 'company',
         rootObj,
-        tabsing:{
-            'project':{
-              result:[],
-              page:1,
-              loading:false,
-              finished:false,
-            },
-            'company':{
-              result:[],
-              page:1,
-              loading:false,
-              finished:false,
-            },
-            'labor':{
-              result:[],
-              page:1,
-              loading:false,
-              finished:false,
-            }
+        tabsing: {
+          'project': {
+            result: [],
+            page: 1,
+            loading: false,
+            finished: false,
+          },
+          'company': {
+            result: [],
+            page: 1,
+            loading: false,
+            finished: false,
+          },
+          'labor': {
+            result: [],
+            page: 1,
+            loading: false,
+            finished: false,
+          }
         },
-        rootArr:[]
+        rootArr: []
       }
     },
     components: {
@@ -198,40 +198,40 @@
       changeStatus(name, title) {
         this.activeName = name;
       },
-      init(){
+      init() {
         indexCount().then(res => {
           this.statisticsData = res;
         });
       },
 
-      searchObj(params){
-        if(this.searchType=='Project'){
-          if(this.rootArr.indexOf('project_show')!=-1){
+      searchObj(params) {
+        if (this.searchType == 'Project') {
+          if (this.rootArr.indexOf('project_show') != -1) {
             this.$router.push({
-              name:this.searchType,
+              name: this.searchType,
               params,
             });
-          }else{
+          } else {
             this.$toast('没有查看权限，请联系管理员');
           }
         }
-        if(this.searchType=='Company'){
-          if(this.rootArr.indexOf('company_show')!=-1){
+        if (this.searchType == 'Company') {
+          if (this.rootArr.indexOf('company_show') != -1) {
             this.$router.push({
-              name:this.searchType,
+              name: this.searchType,
               params,
             });
-          }else{
+          } else {
             this.$toast('没有查看权限，请联系管理员');
           }
         }
-        if(this.searchType=='Labor'){
-          if(this.rootArr.indexOf('labor_show')!=-1){
+        if (this.searchType == 'Labor') {
+          if (this.rootArr.indexOf('labor_show') != -1) {
             this.$router.push({
-              name:this.searchType,
+              name: this.searchType,
               params,
             });
-          }else{
+          } else {
             this.$toast('没有查看权限，请联系管理员');
           }
         }
@@ -239,74 +239,76 @@
 
       onLoad() {
         setTimeout(() => {
-          var oneName=this.activeName;
-          var oneTab=this.tabsing[oneName];
-          var para = {status: false,page:oneTab.page};
-          if(oneName=='project'){
-            if(this.rootArr.indexOf('project_show')!=-1){
+          var oneName = this.activeName;
+          var oneTab = this.tabsing[oneName];
+          var para = {status: false, page: oneTab.page};
+          if (oneName == 'project') {
+            if (this.rootArr.indexOf('project_show') != -1) {
               queryProject(para).then(res => {
-                if(res[oneName].length<10) {
+                if (res[oneName].length < 10) {
                   oneTab.finished = true;
                 }
-                oneTab.loading=false;
-                oneTab.result=res[oneName];
+                oneTab.loading = false;
+                oneTab.result = res[oneName];
                 oneTab.page++;
               });
-            }else{
-              oneTab.loading=false;
+            } else {
+              oneTab.loading = false;
               oneTab.finished = true;
               this.$toast('没有查看权限，请联系管理员');
             }
 
-          }else if(oneName=='company'){
-            if(this.rootArr.indexOf('company_show')!=-1){
+          } else if (oneName == 'company') {
+            if (this.rootArr.indexOf('company_show') != -1) {
               queryCompany(para).then(res => {
-                if(res[oneName].length<10) {
+                if (res[oneName].length < 10) {
                   oneTab.finished = true;
                 }
-                oneTab.loading=false;
-                oneTab.result=res[oneName];
+                oneTab.loading = false;
+                oneTab.result = res[oneName];
                 oneTab.page++;
               });
-            }else{
-              oneTab.loading=false;
+            } else {
+              oneTab.loading = false;
               oneTab.finished = true;
               this.$toast('没有查看权限，请联系管理员');
             }
-          }else if(oneName=='labor'){
-            if(this.rootArr.indexOf('labor_show')!=-1){
+          } else if (oneName == 'labor') {
+            if (this.rootArr.indexOf('labor_show') != -1) {
               queryLabor(para).then(res => {
-                if(res[oneName].length<10) {
+                if (res[oneName].length < 10) {
                   oneTab.finished = true;
                 }
-                oneTab.loading=false;
-                oneTab.result=res[oneName];
+                oneTab.loading = false;
+                oneTab.result = res[oneName];
                 oneTab.page++;
               });
-            }else{
+            } else {
 
-              oneTab.loading=false;
+              oneTab.loading = false;
               oneTab.finished = true;
               this.$toast('没有查看权限，请联系管理员');
             }
           }
         }, 500);
       },
-      myroute(name){
-        var type=this.rootArr.indexOf(this.rootObj[name]);
+      myroute(name) {
+        var type = this.rootArr.indexOf(this.rootObj[name]);
         //console.log(this.rootArr)
-        if (type!=-1){
-          this.$router.push({
-            name,
-          });
-        }else{
-            this.$toast('没有查看权限，请联系管理员')
+        if (type != -1) {
+          var query = {name,}
+          if (name == 'Help') {
+            query['query'] = {"help": 1}
+          }
+          this.$router.push(query);
+        } else {
+          this.$toast('没有查看权限，请联系管理员')
         }
       },
     },
     mounted() {
-      var arrs=localStorage.getItem('permission');
-      this.rootArr=arrs.split(',');
+      var arrs = localStorage.getItem('permission');
+      this.rootArr = arrs.split(',');
       this.init();
       this.onLoad();
 
@@ -351,8 +353,9 @@
   .statistics .van-tabs__wrap {
     margin-bottom: .5rem;
   }
-  .van-tabbar-item--active{
-    color:#7d7e80;
+
+  .van-tabbar-item--active {
+    color: #7d7e80;
   }
 </style>
 

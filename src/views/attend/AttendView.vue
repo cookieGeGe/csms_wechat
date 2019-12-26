@@ -11,7 +11,7 @@
       <AttendItem :isReload="isReload" :isone="true" :result="labor"></AttendItem>
     </div>
 
-    <div class="attend">
+    <div class="attend card">
       <h3 style="font-size: 1.4rem">
         {{dayData.year}}-{{dayData.month}}-{{dayData.day}} 考勤明细
 
@@ -140,6 +140,7 @@
 <style scoped>
   .van-content {
     margin: 0 0;
+    padding: 0 0 !important;
   }
 
   .card {
