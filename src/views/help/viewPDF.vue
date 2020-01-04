@@ -26,6 +26,7 @@
 
 
   export default {
+    name:'HelpPdf',
     components: {
       pdf,
       headerBar
@@ -35,7 +36,7 @@
         currentPage: 0, // pdf文件页码
         pageCount: 0, // pdf文件总页数
         fileType: 'pdf', // 文件类型
-        src: './static/use.pdf', // pdf文件地址
+        src: './static/use_new.pdf', // pdf文件地址
       }
     },
     created() {
