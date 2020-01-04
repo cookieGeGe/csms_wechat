@@ -298,6 +298,7 @@
         if (type != -1) {
           var query = {name,}
           if (name == 'Help') {
+            query = {"name": "HelpPdf"}
             query['query'] = {"help": 1}
           }
           this.$router.push(query);

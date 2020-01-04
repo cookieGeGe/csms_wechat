@@ -14,6 +14,7 @@ import LaborView from '@/views/labor/LaborView'
 
 import Help from '@/views/help/Help'
 import helpView from '@/views/help/helpView'
+import HelpPdf from '@/views/help/viewPDF'
 import guarantee from '@/views/guarantee/guarantee'
 import guaranteeView from '@/views/guarantee/guaranteeView'
 
@@ -28,13 +29,12 @@ import AttendView from '@/views/attend/AttendView'
 import AttendInfo from '@/components/attend/AttendInfo'
 
 
-
 import Search from '@/components/areas/Search'
 
 Vue.use(Router);
 
 export default new Router({
-  mode:'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -136,6 +136,11 @@ export default new Router({
       path: '/AttendInfo',
       name: 'AttendInfo',
       component: AttendInfo
+    },
+    {
+      path: '/HelpPdf',
+      name: 'HelpPdf',
+      component: HelpPdf
     },
   ]
 })
