@@ -1,28 +1,34 @@
 <template>
-  <div class="pdf" v-show="fileType === 'pdf'">
-    <p class="arrow">
-      <span @click="changePdfPage(0)" class="turn" :class="{grey: currentPage==1}">Preview</span>
-      {{currentPage}} / {{pageCount}}
-      <span @click="changePdfPage(1)" class="turn" :class="{grey: currentPage==pageCount}">Next</span>
-    </p>
-    <pdf style="width: 100%"
-      :src="src"
-      :page="currentPage"
-      @num-pages="pageCount=$event"
-      @page-loaded="currentPage=$event"
-      @loaded="loadPdfHandler"
-    >
-    </pdf>
+  <div>
+    <headerBar fatherName="首页" currentNmae="帮助中心"></headerBar>
+    <div class="pdf" v-show="fileType === 'pdf'">
+      <p class="arrow">
+        <span @click="changePdfPage(0)" class="turn" :class="{grey: currentPage==1}">上一页</span>
+        {{currentPage}} / {{pageCount}}
+        <span @click="changePdfPage(1)" class="turn" :class="{grey: currentPage==pageCount}">下一页</span>
+      </p>
+      <pdf style="width: 100%"
+           :src="src"
+           :page="currentPage"
+           @num-pages="pageCount=$event"
+           @page-loaded="currentPage=$event"
+           @loaded="loadPdfHandler"
+      >
+      </pdf>
+    </div>
   </div>
+
 </template>
 
 <script>
-
+  import headerBar from '@/components/areas/headerBar';
   import pdf from 'vue-pdf'
+
 
   export default {
     components: {
-      pdf
+      pdf,
+      headerBar
     },
     data() {
       return {
@@ -71,5 +77,15 @@
     width: 50%;
     height: 800px;
     overflow: scroll;
+  }
+  .arrow{
+    background: #fff;
+    margin: 0;
+    text-align: center;
+    line-height: 2;
+    font-size: 1.6rem;
+  }
+  .turn{
+    color: #8eaccc;
   }
 </style>
