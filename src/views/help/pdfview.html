@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>新建-编辑企业</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .form-group div {
+      line-height: 30px;
+    }
+  </style>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/pdf/jquery.media.js"></script>
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInUp">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="ibox">
+        <center>
+          <div class="panel panel-primary">
+            <!-- <div class="panel-heading" align="center">
+               <h2>预览pdf文件</h2>
+            </div> -->
+            <div class="panel-body">
+              <a class="media" href="javascript:void(0)"></a>
+            </div>
+          </div>
+        </center>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    $(function () {
+      // $('a.media').attr('src', localHost + '/static/template/use.pdf')
+      $('a.media').media({width: '100%', height: '700', autoplay: true, src: '/static/use_new.pdf'});
+    })
+  </script>
+</div>
+</body>
+</html>

@@ -2,19 +2,21 @@
   <div>
     <headerBar fatherName="首页" currentNmae="帮助中心"></headerBar>
     <div class="pdf" v-show="fileType === 'pdf'">
-      <p class="arrow">
-        <span @click="changePdfPage(0)" class="turn" :class="{grey: currentPage==1}">上一页</span>
-        {{currentPage}} / {{pageCount}}
-        <span @click="changePdfPage(1)" class="turn" :class="{grey: currentPage==pageCount}">下一页</span>
-      </p>
-      <pdf style="width: 100%"
-           :src="src"
-           :page="currentPage"
-           @num-pages="pageCount=$event"
-           @page-loaded="currentPage=$event"
-           @loaded="loadPdfHandler"
-      >
-      </pdf>
+      <!--<p class="arrow">-->
+        <!--<span @click="changePdfPage(0)" class="turn" :class="{grey: currentPage==1}">上一页</span>-->
+        <!--{{currentPage}} / {{pageCount}}-->
+        <!--<span @click="changePdfPage(1)" class="turn" :class="{grey: currentPage==pageCount}">下一页</span>-->
+      <!--</p>-->
+      <!--<pdf style="width: 100%"-->
+           <!--:src="src"-->
+           <!--:page="currentPage"-->
+           <!--@num-pages="pageCount=$event"-->
+           <!--@page-loaded="currentPage=$event"-->
+           <!--@loaded="loadPdfHandler"-->
+      <!--&gt;-->
+      <!--</pdf>-->
+      <iframe style="width: 100%; height: 100vh" src="http://47.92.138.195:8083//static/use_new.pdf"></iframe>
+      <!--<iframe style="width: 100%; height: 100vh" src="http://47.92.138.195:8083/pdfview.html"></iframe>-->
     </div>
   </div>
 
@@ -23,10 +25,8 @@
 <script>
   import headerBar from '@/components/areas/headerBar';
   import pdf from 'vue-pdf'
-
-
   export default {
-    name:'HelpPdf',
+    name: 'HelpPdf',
     components: {
       pdf,
       headerBar
@@ -36,12 +36,15 @@
         currentPage: 0, // pdf文件页码
         pageCount: 0, // pdf文件总页数
         fileType: 'pdf', // 文件类型
-        src: './static/use_new.pdf', // pdf文件地址
+        src: '/static/use_new.pdf', // pdf文件地址
       }
     },
     created() {
       // 有时PDF文件地址会出现跨域的情况,这里最好处理一下
-      this.src = pdf.createLoadingTask(this.src)
+      // this.src = pdf.createLoadingTask(this.src)
+    },
+    mounted(){
+      // this.src = pdf.createLoadingTask(this.src)
     },
     methods: {
       // 改变PDF页码,val传过来区分上一页下一页的值,0上一页,1下一页
@@ -79,14 +82,16 @@
     height: 800px;
     overflow: scroll;
   }
-  .arrow{
+
+  .arrow {
     background: #fff;
     margin: 0;
     text-align: center;
     line-height: 2;
     font-size: 1.6rem;
   }
-  .turn{
+
+  .turn {
     color: #8eaccc;
   }
 </style>
