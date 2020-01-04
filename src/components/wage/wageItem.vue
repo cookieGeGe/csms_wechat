@@ -15,8 +15,8 @@
           </div>
         </van-col>
         <van-col span="10">
-            <div class="van-multi-ellipsis--l2 mini-line-height">{{item.projectname}}</div>
-            <div class="van-multi-ellipsis--l2 mini-line-height">{{item.companyname}}</div>
+            <div class="van-multi-ellipsis--l2 mini-line-height">{{item.pro_name}}</div>
+            <div class="van-multi-ellipsis--l2 mini-line-height">{{item.com_name}}</div>
             <div>{{item.classname}}(班组)</div>
         </van-col>
         <van-col span="5" class="t-center">
