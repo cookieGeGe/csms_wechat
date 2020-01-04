@@ -15,8 +15,9 @@
            <!--@loaded="loadPdfHandler"-->
       <!--&gt;-->
       <!--</pdf>-->
-      <iframe style="width: 100%; height: 100vh" src="http://47.92.138.195:8083//static/use_new.pdf"></iframe>
+      <!--<iframe style="width: 100%; height: 100vh" src="http://47.92.138.195:8083//static/use_new.pdf"></iframe>-->
       <!--<iframe style="width: 100%; height: 100vh" src="http://47.92.138.195:8083/pdfview.html"></iframe>-->
+      <iframe style="width: 100%; height: 100vh" src="/static/pdf/web/viewer.html?file=/static/use_new.pdf"></iframe>
     </div>
   </div>
 
