@@ -17,7 +17,7 @@
           <div>每月发放金额：¥{{(item.price / 100 * item.wagepercent).toFixed(2)}}</div>
         </van-col>
         <van-col span="8" align="center"  class="left-border">
-          <div style="color: #d9aa60;font-weight: bold;">¥ {{item.totalpay}}</div>
+          <div style="color: #d9aa60;font-weight: bold;">¥ {{item.totalpay || 0}}</div>
           <div>实发总额(元)</div>
         </van-col>
       </van-row>
