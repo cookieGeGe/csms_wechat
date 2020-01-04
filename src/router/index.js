@@ -1,35 +1,35 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/views/Login'
-import Main from '@/views/Main'
-
-import Company from '@/views/company/Company'
-import CompanyView from '@/views/company/CompanyView'
-
-import Project from '@/views/project/Project'
-import ProjectView from '@/views/project/ProjectView'
-
-import Labor from '@/views/labor/Labor'
-import LaborView from '@/views/labor/LaborView'
-
-import Help from '@/views/help/Help'
-import helpView from '@/views/help/helpView'
-import HelpPdf from '@/views/help/viewPDF'
-import guarantee from '@/views/guarantee/guarantee'
-import guaranteeView from '@/views/guarantee/guaranteeView'
-
-import bank from '@/views/bank/bank'
-import bankView from '@/views/bank/bankView'
-
-import wage from '@/views/wage/wage'
-import wageView from '@/views/wage/wageView'
-
-import Attend from '@/views/attend/Attend'
-import AttendView from '@/views/attend/AttendView'
-import AttendInfo from '@/components/attend/AttendInfo'
-
-
-import Search from '@/components/areas/Search'
+// import Login from '@/views/Login'
+// import Main from '@/views/Main'
+//
+// import Company from '@/views/company/Company'
+// import CompanyView from '@/views/company/CompanyView'
+//
+// import Project from '@/views/project/Project'
+// import ProjectView from '@/views/project/ProjectView'
+//
+// import Labor from '@/views/labor/Labor'
+// import LaborView from '@/views/labor/LaborView'
+//
+// import Help from '@/views/help/Help'
+// import helpView from '@/views/help/helpView'
+// import HelpPdf from '@/views/help/viewPDF'
+// import guarantee from '@/views/guarantee/guarantee'
+// import guaranteeView from '@/views/guarantee/guaranteeView'
+//
+// import bank from '@/views/bank/bank'
+// import bankView from '@/views/bank/bankView'
+//
+// import wage from '@/views/wage/wage'
+// import wageView from '@/views/wage/wageView'
+//
+// import Attend from '@/views/attend/Attend'
+// import AttendView from '@/views/attend/AttendView'
+// import AttendInfo from '@/components/attend/AttendInfo'
+//
+//
+// import Search from '@/components/areas/Search'
 
 Vue.use(Router);
 
