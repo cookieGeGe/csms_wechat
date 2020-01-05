@@ -297,12 +297,10 @@
         //console.log(this.rootArr)
         if (type != -1) {
           var query = {name,}
-          console.log(name)
           if (name == 'Help') {
             query = {"path": "/HelpPdf"}
             query['query'] = {"help": 1}
           }
-          console.log(query)
           this.$router.push(query);
         } else {
           this.$toast('没有查看权限，请联系管理员')
