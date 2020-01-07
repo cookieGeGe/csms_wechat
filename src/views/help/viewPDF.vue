@@ -24,9 +24,8 @@
   import headerBar from '@/components/areas/headerBar';
   import pdf from 'vue-pdf'
 
-
   export default {
-    name:'viewPdf',
+    name: 'HelpPdf',
     components: {
       pdf,
       headerBar
@@ -36,11 +35,14 @@
         currentPage: 0, // pdf文件页码
         pageCount: 0, // pdf文件总页数
         fileType: 'pdf', // 文件类型
-        src: './static/use.pdf', // pdf文件地址
+        src: this.myLocalHost + '/wechat/pdf', // pdf文件地址
       }
     },
     created() {
       // 有时PDF文件地址会出现跨域的情况,这里最好处理一下
+      // this.src = pdf.createLoadingTask(this.src)
+    },
+    mounted() {
       this.src = pdf.createLoadingTask(this.src)
     },
     methods: {
@@ -79,14 +81,16 @@
     height: 800px;
     overflow: scroll;
   }
-  .arrow{
+
+  .arrow {
     background: #fff;
     margin: 0;
     text-align: center;
     line-height: 2;
     font-size: 1.6rem;
   }
-  .turn{
+
+  .turn {
     color: #8eaccc;
   }
 </style>
