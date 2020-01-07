@@ -113,8 +113,9 @@
           </div>
           <div class="one-block">
             <div class="import-text">询问人员:</div>
-            <table class="table person" >
-              <thead>
+            <div style="width: 100%;overflow-x: scroll">
+              <table class="table person" >
+                <thead>
                 <tr>
                   <th style="width: 20%">姓名</th>
                   <th style="width: 25%">电话</th>
@@ -122,17 +123,19 @@
                   <th >时间</th>
                   <th style="width: 25%">工资领取情况</th>
                 </tr>
-              </thead>
-              <tbody  >
-              <tr v-for="person in prog.person">
-                <td >{{person.name}}</td>
-                <td >{{person.phone}}</td>
-                <td >{{person.class}}</td>
-                <td >{{person.time}}</td>
-                <td >{{person.wage}}</td>
-              </tr>
-              </tbody>
-            </table>
+                </thead>
+                <tbody  >
+                <tr v-for="person in prog.person">
+                  <td >{{person.name}}</td>
+                  <td >{{person.phone}}</td>
+                  <td >{{person.class}}</td>
+                  <td >{{person.time}}</td>
+                  <td >{{person.wage}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
           </div>
         <div class="one-block">
           <div class="import-text">进度图片:</div>
@@ -250,6 +253,9 @@
     border-collapse: collapse;
     width: 95%;margin-top: 1px;
   }
+  .person{
+    width:150%;
+  }
   .table tr td,table{
     border: 1px solid #3c3c3c;
     padding-left: .5rem;
@@ -258,15 +264,15 @@
   .table tr td span{
     font-weight: normal;
   }
-  .table.person tr th{
-    font-weight: bold;
-    border: 1px solid #ececec;
-  }
+
   .table.person tr th,.table.person tr td{
     border: 1px solid #ececec;
     padding-left: 0;
     font-weight: normal;
     text-align: center;
-    font-size: .3rem;
+    font-size: 1rem;
+  }
+  .table.person tr th{
+    font-weight: bold;
   }
 </style>
