@@ -34,8 +34,8 @@
     data () {
       return {
         msg: '用户登录',
-        LoginName: 'admin',
-        Password: '123456',
+        LoginName: '',
+        Password: '',
       }
     },
     methods: {
