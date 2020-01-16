@@ -44,7 +44,7 @@
             <span v-else style="color: #d9aa60">未打卡</span>
 
           </div>
-          <div>打卡地址:{{dayData.pmoutpos}}</div>
+          <div>打卡地址:{{dayData.pminpos}}</div>
           <div class="time">下班:
             <span v-if="dayData.pmout&&dayData.pmout.length>0">{{dayData.pmout}}</span>
             <span v-else style="color: #d9aa60">未打卡</span>
