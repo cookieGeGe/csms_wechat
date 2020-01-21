@@ -8,14 +8,16 @@ import VueScroller from "vue-scroller"
 
 import 'vant/lib/index.css';
 import './assets/reset.css'
+import service from "./utils/request";
 
+var base = "http://120.78.163.106:5000"
 
-
+service.defaults.baseURL = base;
 Vue.use(VueScroller);
 Vue.use(Vant);
 
 Vue.config.productionTip = false;
-Vue.prototype.myLocalHost="http://47.92.138.195:5000";
+Vue.prototype.myLocalHost= base;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -6,10 +6,12 @@ import {Toast,Dialog} from 'vant'
 
 // 创建axios实例
 const service = axios.create({
-   baseURL: 'http://47.92.138.195:5000/', // api的base_url
+   // baseURL: 'http://120.78.163.106:5000/', // api的base_url
  // baseURL: 'http://127.0.0.1:5000/', // api的base_url
   timeout: 5000 // 请求超时时间
 });
+
+console.log(service)
 
 // request拦截器
 service.interceptors.request.use(config => {
