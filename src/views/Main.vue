@@ -311,7 +311,6 @@
       var arrs = localStorage.getItem('permission');
       this.rootArr = arrs.split(',');
       this.init();
-      this.onLoad();
 
     },
   }
