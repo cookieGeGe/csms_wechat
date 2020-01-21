@@ -238,7 +238,7 @@
       },
 
       onLoad() {
-        // setTimeout(() => {
+        setTimeout(() => {
           var oneName = this.activeName;
           var oneTab = this.tabsing[oneName];
           var para = {status: false, page: oneTab.page};
@@ -290,7 +290,7 @@
               this.$toast('没有查看权限，请联系管理员');
             }
           }
-        // }, 500);
+        }, 200);
       },
       myroute(name) {
         var type = this.rootArr.indexOf(this.rootObj[name]);
