@@ -14,7 +14,7 @@
       <van-col span="20">
           <div class="one-block">
             <van-row type="flex"  align="center">
-              <van-col style="margin-right: .5rem">工资:</van-col>
+              <van-col style="margin-right: .5rem">进度:</van-col>
               <van-col span="15">
                 <van-progress
                     :percentage="percentage"

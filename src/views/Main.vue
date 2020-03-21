@@ -36,7 +36,7 @@
                   inactive-color="#3c3c3c"
                   style="background: transparent;height: 6rem;font-size: 1.6rem"
       >
-        <van-tabbar-item @click="myroute('Company')">
+        <van-tabbar-item @click="myroute('Company')" style="color:rgb(60,60,0);">
           <span>企业查询</span>
           <img slot="icon" src="../assets/index/index_icon1.png">
         </van-tabbar-item>
@@ -58,7 +58,7 @@
                   inactive-color="#3c3c3c"
                   style="background: transparent;height: 6rem"
       >
-        <van-tabbar-item @click="myroute('wage')">
+        <van-tabbar-item @click="myroute('wage')"  style="color:rgb(60,60,0);">
           <span>工资查询</span>
           <img slot="icon" src="../assets/index/index_icon5.png">
         </van-tabbar-item>

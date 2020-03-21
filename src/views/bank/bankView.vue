@@ -19,25 +19,27 @@
         </van-col>
         <van-col span="20" class="bankinfo">
           <div class="title">{{month_bank.year}}年 {{month_bank.month}}月 银行账户信息</div>
-          <div v-if="month_bank.status==0">支付状态；
+          <div v-if="month_bank.status==0">支付状态:
             <van-tag color="#8ec5cc">全额到</van-tag>
           </div>
-          <div v-else-if="month_bank.status==1">支付状态；
+          <div v-else-if="month_bank.status==1">支付状态:
             <van-tag color="#d9aa60">部分到</van-tag>
           </div>
-          <div v-else>支付状态；
+          <div v-else>支付状态:
             <van-tag color="#d96c60">未到账</van-tag>
           </div>
-          <div>每月余额；{{month_bank.rpay - month_bank.actualpay||'0'}}</div>
+          <div>每月余额: {{month_bank.rpay - month_bank.actualpay||'0'}}</div>
           <div>开卡数：{{month_bank.workers || '0'}}</div>
           <div>当月账户收到金额：{{month_bank.rpay||'0'}}</div>
           <div>总支出金额：{{month_bank.actualpay || '0'}}</div>
           <div class="title">银行回单</div>
           <div>
-            <img v-if="month_bank.receipt && month_bank.receipt != ''" @click="showimg(myLocalHost+month_bank.receipt)"
-                 :src="myLocalHost+month_bank.receipt"
-                 alt="">
-            <img v-else src="../../assets/index/no_pic.jpg" alt="">
+            <p v-if="month_bank.receipt && month_bank.receipt != ''">已上传银行回单，暂不显示xls，详情请移步PC端</p>
+            <p style="color: rgb(217, 108, 96)" v-else>还没有添加回单哟~</p>
+<!--            <img v-if="month_bank.receipt && month_bank.receipt != ''" @click="showimg(myLocalHost+month_bank.receipt)"-->
+<!--                 :src="myLocalHost+month_bank.receipt"-->
+<!--                 alt="">-->
+<!--            <img v-else src="../../assets/index/no_pic.jpg" alt="">-->
           </div>
           <div v-if="month_bank.receipt && month_bank.receipt != ''">上传时间 {{month_bank.rectime}}</div>
         </van-col>
