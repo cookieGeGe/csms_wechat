@@ -39,7 +39,7 @@
             </van-col>
           </van-row>
           <van-row type="flex" >
-            <van-col span="8">
+            <van-col span="8" v-show="show">
                是否不良: <van-tag color="#8eaccc" v-if="item.isbadrecord==0">否</van-tag>
                <van-tag color="#d9aa60" v-else="item.isbadrecord==1">不良</van-tag>
                <van-tag color="#d9aa60" v-if="item.isbadrecord==2">黑名单</van-tag>
@@ -99,7 +99,7 @@
             <van-tab title="备注信息">
               <p>{{item.remark}}</p>
             </van-tab>
-            <van-tab title="不良信息">
+            <van-tab title="不良信息" v-show="show">
               <p>{{item.badrecord}}</p>
             </van-tab>
           </van-tabs>
@@ -130,6 +130,7 @@
         item: {
 
         },
+        show:false,
         active:0,
         groupList:[]
       }
@@ -162,6 +163,10 @@
       }
     },
     mounted(){
+      var show_company = localStorage.getItem('permission');
+      if (show_company.split(',').indexOf('labor_badrecord_show') !== -1){
+        this.show = true
+      }
       this.id = this.$route.query.id;
       this.sources = this.$route.query.sources;
       this.init();

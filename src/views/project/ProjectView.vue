@@ -34,7 +34,7 @@
         <GroupImg :groupList="groupList"></GroupImg>
       </van-tab>
       <van-tab title="项目进度">
-        <Progress :progress="progress" :yearlist="year_month_info" ></Progress>
+        <Progress v-show="show" :progress="progress" :yearlist="year_month_info" ></Progress>
       </van-tab>
       <van-tab title="分包企业">
         <div  v-for="(subcompany,i) in item.subcompany" class="preson" style=" padding: .5rem 2rem" >
@@ -127,7 +127,10 @@
       }
     },
     mounted(){
-
+      var show_company = localStorage.getItem('permission');
+      if (show_company.split(',').indexOf('progress_show') !== -1){
+        this.show = true
+      }
       this.id = this.$route.query.id;
       this.sources = this.$route.query.sources;
       this.init();

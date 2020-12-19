@@ -39,7 +39,7 @@
               @click="changeCont"
     >
       <van-tab title="公司图片" >
-        <GroupImg :groupList="groupList"></GroupImg>
+        <GroupImg v-show="show" :groupList="groupList"></GroupImg>
       </van-tab>
       <van-tab title="相关项目">
         <van-list
@@ -53,15 +53,15 @@
       </van-tab>
       <van-tab title="备注信息" class="description">
         <div>备注:</div>
-        <p>{{item.description}}</p>
+        <p v-show="show">{{item.description}}</p>
         <div>其他信息:</div>
-        <p>{{item.otherinfo}}</p>
+        <p v-show="show">{{item.otherinfo}}</p>
       </van-tab>
       <van-tab title="资质及文件" class="description" >
         <div>资质文件:</div>
-        <p><img :src="myLocalHost+item.license" alt="" width="100%" @click="previewshow()"></p>
+        <p v-show="show"><img :src="myLocalHost+item.license" alt="" width="100%" @click="previewshow()"></p>
         <div>其他文件:</div>
-        <p v-for="other in item.other_file_list"><a  :href="myLocalHost+other.filepath" :download="other.filename">{{other.filename}}</a></p>
+        <p v-show="show" v-for="other in item.other_file_list"><a  :href="myLocalHost+other.filepath" :download="other.filename">{{other.filename}}</a></p>
       </van-tab>
     </van-tabs>
 
@@ -144,6 +144,10 @@
       }
     },
     mounted(){
+      var show_company = localStorage.getItem('permission');
+      if (show_company.split(',').indexOf('company_some_show') !== -1){
+        this.show = true
+      }
       this.id = this.$route.query.id;
       this.sources = this.$route.query.sources;
       this.init();

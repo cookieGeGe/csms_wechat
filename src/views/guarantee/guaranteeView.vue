@@ -17,6 +17,7 @@
       </div>
       <div class="info">
         <span>费用信息</span>
+        <span>业务经理：{{result.cun}}</span>
         <span>实际收费(万元)：{{result.realac}}</span>
         <span>保证金比例：{{result.marginratio || 0}}%</span>
         <span>保证金：{{result.margin}}%</span>

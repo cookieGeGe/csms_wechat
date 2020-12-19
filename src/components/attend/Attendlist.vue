@@ -33,7 +33,6 @@
         laborJob,
         laborSex,
         results: [],
-        type:''
       }
     },
     props: ['result', 'isReload', 'type'],
@@ -46,7 +45,7 @@
             id,
             date,
             name,
-            type:this.type,
+            'type':this.type,
           },
         });
       }

@@ -1,6 +1,6 @@
 <template>
   <div class="company">
-    <headerBar fatherName="首页" currentNmae="考勤查询"></headerBar>
+    <headerBar :fatherName="sources" currentNmae="考勤查询"></headerBar>
     <van-tabs background="transparent"
               color="#fff"
               title-inactive-color="#fff"
@@ -110,7 +110,7 @@
 
 
   export default {
-    name: 'Company',
+    name: 'Attend',
     data() {
       return {
         show: false,
@@ -123,6 +123,7 @@
           month: '',
           page: 1,
         },
+        sources: '',
         loading: false,
         isReload: true,
         finished: false,
@@ -139,7 +140,7 @@
         com_loading: false,
         com_isReload: true,
         com_finished: false,
-        com_result: [],
+        // com_result: [],
         com_result: 0,
         com_total: 0,
       }
@@ -237,11 +238,21 @@
       }
     },
     created() {
-      // localStorage.setItem('searchParams', JSON.stringify(this.$route.params));
+      if (this.$route.query.hasOwnProperty('name')) {
+        var temp = {
+          name: this.$route.query.name
+        };
+        this.sources = this.$route.query.sources;
+        // this.searching();
+        this.searchObj(temp)
+      } else {
+        this.sources = '首页';
+        this.searching()
+      }
     },
     mounted() {
-      this.searching();
-      // this.searchObj(this.$route.params)
+
+
     }
   }
 </script>

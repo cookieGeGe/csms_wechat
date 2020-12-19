@@ -11,7 +11,8 @@
         <van-col span="4" style="text-align: right">
           <van-tag color="#8ec5cc"  v-if="item.status <=1">{{projectBad(item.status)}} </van-tag>
           <van-tag color="#d9aa60" v-else>{{projectBad(item.status)}} </van-tag>
-          <van-tag color="#8eaccc" style="margin-top: .5rem" v-if="daochu" @click="file(item.name,item.id)">导出</van-tag>
+          <van-tag color="#8eaccc" style="margin-top: .5rem" v-if="daochu" @click.stop="file(item.name,item.id)">导出</van-tag>
+          <van-tag color="#8eaccc" style="margin-top: .5rem" v-if="daochu" @click.stop="kaoqin(item.name,item.id)">考勤</van-tag>
         </van-col>
       </van-row>
       <van-row  type="flex" justify="space-between" >
@@ -45,7 +46,7 @@
 <script>
   import {projectType, projectBad,guarantype}  from '@/utils/type'
   export default {
-    name: 'CompnayListItem',
+    name: 'ProjectListItem',
     data () {
       return {
         projectType,
@@ -68,6 +69,15 @@
       file(name,id){
           var href=this.myLocalHost+'/template/export?type=word&ft=project&id='+id;
           window.open(href,name);
+      },
+      kaoqin(name, id){
+        this.$router.push({
+          path:'/Attend',
+          query:{
+            name,
+            sources:'项目详情'
+          },
+        });
       }
     },
     watch: {                        //监听value的变化，进行相应的操作即可

@@ -10,6 +10,7 @@ import 'vant/lib/index.css';
 import './assets/reset.css'
 import service from "./utils/request";
 
+// var base = "http://127.0.0.1:5000";
 var base = "http://120.78.163.106:5000";
 
 service.defaults.baseURL = base;
